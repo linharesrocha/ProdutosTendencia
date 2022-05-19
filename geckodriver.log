@@ -321,3 +321,23 @@ DevTools listening on ws://localhost:60083/devtools/browser/7ae250e4-9077-4b7b-a
 1653003946885	Marionette	INFO	Listening on port 38147
 Read port: 38147
 1653003946975	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+1653004096070	geckodriver	INFO	Listening on 127.0.0.1:33577
+1653004096078	mozrunner::runner	INFO	Running command: "/usr/local/bin/firefox" "--marionette" "-headless" "--remote-debugging-port" "34913" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "/tmp/rust_mozprofileD0waWe"
+*** You are running in headless mode.
+1653004096618	Marionette	INFO	Marionette enabled
+[GFX1-]: RenderCompositorSWGL failed mapping default framebuffer, no dt
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at /tmp/rust_mozprofileD0waWe/search.json.mozlz4", (void 0)))
+DevTools listening on ws://localhost:34913/devtools/browser/22b58341-6cd0-4b8d-a912-fc53e4ae2bc5
+1653004098351	Marionette	INFO	Listening on port 35163
+Read port: 35163
+1653004098412	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+1653004114500	geckodriver	INFO	Listening on 127.0.0.1:41811
+1653004114505	mozrunner::runner	INFO	Running command: "/usr/local/bin/firefox" "--marionette" "-headless" "--remote-debugging-port" "53957" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "/tmp/rust_mozprofile9VlDKA"
+*** You are running in headless mode.
+1653004114941	Marionette	INFO	Marionette enabled
+[GFX1-]: RenderCompositorSWGL failed mapping default framebuffer, no dt
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at /tmp/rust_mozprofile9VlDKA/search.json.mozlz4", (void 0)))
+DevTools listening on ws://localhost:53957/devtools/browser/56a6e8ea-a06b-4b3d-a5a4-7a7c81fccccd
+1653004116553	Marionette	INFO	Listening on port 43729
+Read port: 43729
+1653004116627	RemoteAgent	WARN	TLS certificate errors will be ignored for this session

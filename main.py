@@ -29,12 +29,13 @@ sleep(4)
 page_content = navegador.page_source
 site = BeautifulSoup(page_content, 'html.parser')
 
-
 # Carrousel -> As buscas que mais cresceram
 carrousel_grow = site.find(class_="ui-search-carousel")
 
 # Pegando produtos -> As buscas que mais cresceram
 product_list = carrousel_grow.findAll('div', class_='entry-column')
 
+# Buscando produtos e salvando em uma lista
 product_name_grow = [p.find('p', class_ = 'ui-search-entry-keyword').getText() for p in product_list]
-print(product_name_grow)
+product_position_grow = [p.find('div', class_ = 'ui-search-entry-description').getText() for p in product_list]
+print(product_position_grow)
