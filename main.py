@@ -11,7 +11,7 @@ url = "https://tendencias.mercadolivre.com.br/1276-esportes_e_fitness"
 
 # Configurações
 option = Options()
-option.headless = False
+option.headless = True
 navegador = webdriver.Firefox(options=option)
 
 # Iniciando Navegador
@@ -30,15 +30,11 @@ page_content = navegador.page_source
 site = BeautifulSoup(page_content, 'html.parser')
 
 
+# Carrousel -> As buscas que mais cresceram
+carrousel_grow = site.find(class_="ui-search-carousel")
+
 # Pegando produtos -> As buscas que mais cresceram
-product_list = site.findAll(class_="ui-search-carousel:nth-child(1)")
-print(len(product_list))
+product_list = carrousel_grow.findAll('div', class_='entry-column')
 
-
-# for p in product_list:
-#     print(p.find('p', {'class': 'ui-search-carousel:nth-child(1) ui-search-entry-keyword'}))
-
-
-
-
-# .ui-search-carousel:nth-child(1) .andes-card--padding-0
+product_name_grow = [p.find('p', class_ = 'ui-search-entry-keyword').getText() for p in product_list]
+print(product_name_grow)

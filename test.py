@@ -32,7 +32,7 @@ page_content = navegador.page_source
 site = BeautifulSoup(page_content, 'html.parser')
 
 # Pegando produtos -> As buscas que mais cresceram
-product_list = site.findAll(class_="ui-search-carousel:nth-child(1)")
+product_list = site.findAll(class_="ui-search-carousel")
 print(len(product_list))
 
 
