@@ -3,6 +3,9 @@ from selenium import webdriver
 from selenium.webdriver.firefox.options import Options
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
+from selenium.common.exceptions import TimeoutException
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 import pandas as pd
 from datetime import datetime
 from time import sleep
@@ -23,16 +26,20 @@ def pagina_gategoria_tendencia():
 
     # Iniciando Navegador
     navegador.get(url)
-    sleep(2)
 
     # Descendo a pagina para carregar todos os produtos
     body = navegador.find_element(By.CSS_SELECTOR, "body")
 
     for i in range(1, 20):
         body.send_keys(Keys.PAGE_DOWN)
-    sleep(4)
 
-    # Salvando a página
+    try:
+        element_present = EC.presence_of_element_located((By.CLASS_NAME, 'ui-search-entry-keyword'))
+        print(element_present)
+        WebDriverWait(navegador, 10).until(element_present)
+    except TimeoutException:
+        print("Timed out waiting for page to load")
+
     page_content = navegador.page_source
     site = BeautifulSoup(page_content, 'html.parser')
 
@@ -44,7 +51,7 @@ def pagina_gategoria_tendencia():
 
     # Buscando produtos e salvando em uma lista
     product_position_grow = [p.find('div', class_ = 'ui-search-entry-description').getText().replace('º MAIOR CRESCIMENTO', '') for p in product_list]
-    product_name_grow = [p.find('p', class_ = 'ui-search-entry-keyword').getText() for p in product_list]
+    product_name_grow = [p.find('h3', class_ = 'ui-search-entry-keyword').getText() for p in product_list]
     product_link_grow = [p.find('a', href=True).get('href').replace('#trend', '') for p in product_list]
 
     # DataFrame
@@ -57,6 +64,7 @@ def pagina_gategoria_tendencia():
     data_grow['Mediana-Preco'] = 0
     data_grow['Media-Vendas'] = 0
     data_grow['Mediana-Vendas'] = 0
+    data_grow['GoogleTrends'] = 'NA'
 
 
     return data_grow
@@ -65,8 +73,10 @@ def pagina_gategoria_tendencia():
 
 def pagina_pesquisa_produto(data_grow):
 
-    # QUANDO BUSCA O PRODUTO E RETORNA TODAS AS OPÇÕES
-    for z in range(len(data_grow)):
+    # ACESSA CADA PRODUTO TENDENDIA, -> 1PRIMEIRO PRODUTO TENDENCIA, 2PRODUTO TENDENCIAS E
+    # ACESSA TODOS ELES UM DE CADA VEZ
+    #for z in range(len(data_grow)):
+    for z in range(2):
         url = data_grow.loc[z, "Link"]
         print(url)
 
@@ -86,26 +96,20 @@ def pagina_pesquisa_produto(data_grow):
         product_normal_quantity = site.find('span', class_="ui-search-search-result__quantity-results").getText()
 
         try:
-            # Redirecionando FULL
             navegador.get(url + "_Frete_Full")
-
-            # Salvando a página
             page_content = navegador.page_source
             site = BeautifulSoup(page_content, 'html.parser')
 
             # Quantidade de anúncios FULL
             product_full_quantity = site.find('span', class_="ui-search-search-result__quantity-results").getText()
 
-            # Volta Página
             navegador.get(url)
         except AttributeError:
             product_full_quantity = 'NaoTem'
 
-            # Volta Página
             navegador.get(url)
             sleep(1)
 
-            # Salvando a página
             page_content = navegador.page_source
             site = BeautifulSoup(page_content, 'html.parser')
 
@@ -118,13 +122,13 @@ def pagina_pesquisa_produto(data_grow):
         products_price = []
         products_sales = []
 
-        # ACESSA CADA PRODUTO DENTRO DE ALGUMA CATEGORIA/PRODUTO TENDENCIA
+        # ACESSA CADA PRODUTO DENTRO DE ALGUMA CATEGORIA/TENDENCIA
         # TIRAR MEDIA DE QUANTIDADE DE VENDAS, PRECO
 
         products_length = len(product_link)
         products_length = round(products_length / 3)
-        for i in range(products_length):
-            print('{} / {}'.format(i, products_length))
+        #for i in range(products_length):
+        for i in range(3):
             navegador.get(product_link[i])
 
             page_content = navegador.page_source
@@ -148,19 +152,14 @@ def pagina_pesquisa_produto(data_grow):
 
             # Caso não tenha número de vendas
             if sales != 'Novo':
-                # Cleaning sales name and string
                 products_sales_clean = re.findall('[0-9]+', sales)
-
-                # List to String
                 products_sales_clean = ''.join(map(str, products_sales_clean))
                 products_sales.append(products_sales_clean)
             else:
                 products_sales.append('0')
 
 
-        # Price
         products_price_list = list(map(int, products_price))
-        # Sales
         products_sales_list = list(map(int, products_sales))
 
         products_sales_mean = statistics.mean(products_sales_list)
@@ -174,6 +173,10 @@ def pagina_pesquisa_produto(data_grow):
         data_grow.loc[z, 'Mediana-Preco'] = products_price_median
         data_grow.loc[z, 'Media-Vendas'] = products_sales_mean
         data_grow.loc[z, 'Mediana-Vendas'] = products_sales_median
+
+        url_gtrends = "https://trends.google.com.br/trends/explore?geo=BR&q="
+        name_product = data_grow.loc[z, 'Nome']
+        data_grow.loc[z, 'GoogleTrends'] = url_gtrends + name_product
 
         data_grow.to_excel("produtos.xlsx", index=False, encoding='utf-8')
 
