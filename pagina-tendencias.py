@@ -45,5 +45,3 @@ product_link_grow = [p.find('a', href=True).get('href').replace('#trend', '') fo
 data_grow = pd.DataFrame([product_position_grow, product_name_grow, product_link_grow]).T
 data_grow.columns = ['Posicao', 'Nome', 'Link']
 data_grow['scrapy_datetime'] = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-
-data_grow.to_excel('/home/gui/workspace/Tendencias/data_grow.xlsx', index=False, encoding='utf-8')
