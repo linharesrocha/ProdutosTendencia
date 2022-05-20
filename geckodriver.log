@@ -1570,3 +1570,41 @@ DevTools listening on ws://localhost:59761/devtools/browser/dd05f889-0fba-4e30-a
 1653073090069	Marionette	INFO	Stopped listening on port 59766
 console.warn: TopSitesFeed: Failed to fetch data from Contile server: NetworkError when attempting to fetch resource.
 JavaScript error: chrome://remote/content/marionette/cert.js, line 55: NS_ERROR_NOT_AVAILABLE: Component returned failure code: 0x80040111 (NS_ERROR_NOT_AVAILABLE) [nsICertOverrideService.setDisableAllSecurityChecksAndLetAttackersInterceptMyData]
+1653073413172	geckodriver	INFO	Listening on 127.0.0.1:60065
+1653073416242	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--remote-debugging-port" "60066" "-no-remote" "-profile" "C:\\Users\\FAT-01\\AppData\\Local\\Temp\\rust_mozprofileFd8Y2x"
+1653073416488	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\FAT-01\\AppData\\Local\\Temp\\rust_mozprofileFd8Y2x\\search.json.mozlz4", (void 0)))
+DevTools listening on ws://localhost:60066/devtools/browser/e145a3bd-5620-4cc3-b59b-df80fef45fe1
+1653073418036	Marionette	INFO	Listening on port 60071
+1653073418303	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+1653073600054	Marionette	INFO	Stopped listening on port 60071
+console.warn: TopSitesFeed: Failed to fetch data from Contile server: NetworkError when attempting to fetch resource.
+
+###!!! [Parent][PGPUParent] Error: RunMessage(msgname=PGPU::Msg_ShutdownVR) Channel closing: too late to send/recv, messages will be lost
+
+1653073603922	geckodriver	INFO	Listening on 127.0.0.1:60265
+1653073607004	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--remote-debugging-port" "60266" "-no-remote" "-profile" "C:\\Users\\FAT-01\\AppData\\Local\\Temp\\rust_mozprofileafPHk9"
+1653073607246	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\FAT-01\\AppData\\Local\\Temp\\rust_mozprofileafPHk9\\search.json.mozlz4", (void 0)))
+DevTools listening on ws://localhost:60266/devtools/browser/d7c770a7-a78d-47ab-96e9-45610cb4a2c1
+1653073608670	Marionette	INFO	Listening on port 60271
+1653073609034	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+1653073651138	Marionette	INFO	Stopped listening on port 60271
+console.warn: TopSitesFeed: Failed to fetch data from Contile server: NetworkError when attempting to fetch resource.
+
+###!!! [Parent][PGPUParent] Error: RunMessage(msgname=PGPU::Msg_ShutdownVR) Channel closing: too late to send/recv, messages will be lost
+
+1653073831779	geckodriver	INFO	Listening on 127.0.0.1:60482
+1653073834862	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--remote-debugging-port" "60483" "-no-remote" "-profile" "C:\\Users\\FAT-01\\AppData\\Local\\Temp\\rust_mozprofile75wDYo"
+1653073835090	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\FAT-01\\AppData\\Local\\Temp\\rust_mozprofile75wDYo\\search.json.mozlz4", (void 0)))
+DevTools listening on ws://localhost:60483/devtools/browser/5aa382db-6ecb-49f9-b801-12c13c91e3b1
+1653073836496	Marionette	INFO	Listening on port 60488
+1653073836914	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+JavaScript error: resource://gre/actors/ContentMetaChild.jsm, line 179: InvalidStateError: JSWindowActorChild.sendAsyncMessage: JSWindowActorChild cannot send at the moment
+1653073917237	Marionette	WARN	Ignoring event 'DOMContentLoaded' because document has an invalid readyState of 'complete'.
+JavaScript error: resource://gre/actors/ContentMetaChild.jsm, line 179: InvalidStateError: JSWindowActorChild.sendAsyncMessage: JSWindowActorChild cannot send at the moment
+1653074093165	Marionette	INFO	Stopped listening on port 60488
+JavaScript error: , line 0: TypeError: NetworkError when attempting to fetch resource.
+JavaScript error: , line 0: TypeError: NetworkError when attempting to fetch resource.
+console.warn: TopSitesFeed: Failed to fetch data from Contile server: NetworkError when attempting to fetch resource.

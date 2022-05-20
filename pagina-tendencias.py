@@ -51,10 +51,13 @@ def pagina_gategoria_tendencia():
     data_grow = pd.DataFrame([product_position_grow, product_name_grow, product_link_grow]).T
     data_grow.columns = ['Posicao', 'Nome', 'Link']
     data_grow['scrapy_datetime'] = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-    data_grow['Media-Preco'] = 0
     data_grow['Qnt-Normal'] = 0
     data_grow['Qnt-FULL'] = 0
-    data_grow['Vendas'] = 0
+    data_grow['Media-Preco'] = 0
+    data_grow['Mediana-Preco'] = 0
+    data_grow['Media-Vendas'] = 0
+    data_grow['Mediana-Vendas'] = 0
+
 
     return data_grow
 
@@ -63,9 +66,8 @@ def pagina_gategoria_tendencia():
 def pagina_pesquisa_produto(data_grow):
 
     # QUANDO BUSCA O PRODUTO E RETORNA TODAS AS OPÇÕES
-    # for i in range(len(data_grow)):
-    for i in range(2):
-        url = data_grow.loc[i, "Link"]
+    for z in range(len(data_grow)):
+        url = data_grow.loc[z, "Link"]
         print(url)
 
         navegador.get(url)
@@ -108,11 +110,6 @@ def pagina_pesquisa_produto(data_grow):
             site = BeautifulSoup(page_content, 'html.parser')
 
 
-
-        print('Quantidade Full ' + product_full_quantity)
-        print('Quantidade Normal ' + product_normal_quantity)
-
-
         # TODOS OS PRODUTOS
         container = site.find(class_='ui-search-results')
         product_container = container.findAll('li', class_='ui-search-layout__item')
@@ -124,10 +121,10 @@ def pagina_pesquisa_produto(data_grow):
         # ACESSA CADA PRODUTO DENTRO DE ALGUMA CATEGORIA/PRODUTO TENDENCIA
         # TIRAR MEDIA DE QUANTIDADE DE VENDAS, PRECO
 
-        # products_length = len(product_link)
-        # for i in range(products_length):
-        #     print('{} / {}'.format(i, products_length))
-        for i in range(2):
+        products_length = len(product_link)
+        products_length = round(products_length / 3)
+        for i in range(products_length):
+            print('{} / {}'.format(i, products_length))
             navegador.get(product_link[i])
 
             page_content = navegador.page_source
@@ -161,20 +158,24 @@ def pagina_pesquisa_produto(data_grow):
                 products_sales.append('0')
 
 
-    # Price
-    products_price_list = list(map(int, products_price))
-    # Sales
-    products_sales_list = list(map(int, products_sales))
+        # Price
+        products_price_list = list(map(int, products_price))
+        # Sales
+        products_sales_list = list(map(int, products_sales))
 
-    products_sales = statistics.mean(products_sales_list)
-    products_price = statistics.mean(products_price_list)
+        products_sales_mean = statistics.mean(products_sales_list)
+        products_price_mean = statistics.mean(products_price_list)
+        products_sales_median = statistics.median(products_sales_list)
+        products_price_median = statistics.median(products_price_list)
 
-    data_grow.loc[i, 'Qnt-Normal'] = product_normal_quantity
-    data_grow.loc[i, 'Qnt-FULL'] = product_full_quantity
-    data_grow.loc[i, 'Media-Preco'] = products_price
-    data_grow.loc[i, 'Vendas'] = products_sales
+        data_grow.loc[z, 'Qnt-Normal'] = product_normal_quantity
+        data_grow.loc[z, 'Qnt-FULL'] = product_full_quantity
+        data_grow.loc[z, 'Media-Preco'] = products_price_mean
+        data_grow.loc[z, 'Mediana-Preco'] = products_price_median
+        data_grow.loc[z, 'Media-Vendas'] = products_sales_mean
+        data_grow.loc[z, 'Mediana-Vendas'] = products_sales_median
 
-    data_grow.to_excel("produtos.xlsx", index=False, encoding='utf-8')
+        data_grow.to_excel("produtos.xlsx", index=False, encoding='utf-8')
 
 
 if __name__ == "__main__":
