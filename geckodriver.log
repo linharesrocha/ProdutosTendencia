@@ -609,3 +609,224 @@ Read port: 34613
 1653011131184	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
 1653011135582	addons.xpi	ERROR	System addon update list error Error: Failed downloading XML, status: 0, reason: error
 JavaScript error: https://connect.facebook.net/en_US/fbevents.js, line 24: NS_ERROR_FAILURE: 
+1653011424226	Marionette	INFO	Stopped listening on port 34613
+1653011424467	Marionette	INFO	Stopped listening on port 42067
+1653011424501	Marionette	INFO	Stopped listening on port 44793
+1653011424590	Marionette	INFO	Stopped listening on port 44123
+1653011510855	geckodriver	INFO	Listening on 127.0.0.1:32827
+1653011511351	mozrunner::runner	INFO	Running command: "/usr/local/bin/firefox" "--marionette" "-headless" "--remote-debugging-port" "45643" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "/tmp/rust_mozprofileeWFM0V"
+*** You are running in headless mode.
+1653011513274	Marionette	INFO	Marionette enabled
+[GFX1-]: RenderCompositorSWGL failed mapping default framebuffer, no dt
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at /tmp/rust_mozprofileeWFM0V/search.json.mozlz4", (void 0)))
+DevTools listening on ws://localhost:45643/devtools/browser/ef3ca008-2db0-4153-b3be-01924c32db2d
+1653011518320	Marionette	INFO	Listening on port 42513
+Read port: 42513
+1653011518407	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+1653011702072	geckodriver	INFO	Listening on 127.0.0.1:52011
+1653011702576	mozrunner::runner	INFO	Running command: "/usr/local/bin/firefox" "--marionette" "-headless" "--remote-debugging-port" "45997" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "/tmp/rust_mozprofiles6XIkk"
+*** You are running in headless mode.
+1653011702937	Marionette	INFO	Marionette enabled
+[GFX1-]: RenderCompositorSWGL failed mapping default framebuffer, no dt
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at /tmp/rust_mozprofiles6XIkk/search.json.mozlz4", (void 0)))
+DevTools listening on ws://localhost:45997/devtools/browser/d0dc592c-48da-45c6-b12f-7f1146e0de1f
+1653011704351	Marionette	INFO	Listening on port 39851
+Read port: 39851
+1653011704397	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+JavaScript warning: https://pagead2.googlesyndication.com/bg/AAcrpHDydyl_zLrsUqLIoJaIpM6fuyfNuw3JGtq9cUA.js line 1 > eval line 2253 > eval line 1 > eval line 1 > eval, line 1: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+1653011775303	geckodriver	INFO	Listening on 127.0.0.1:37323
+1653011775309	mozrunner::runner	INFO	Running command: "/usr/local/bin/firefox" "--marionette" "-headless" "--remote-debugging-port" "39515" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "/tmp/rust_mozprofileWX0Wcu"
+*** You are running in headless mode.
+1653011775720	Marionette	INFO	Marionette enabled
+[GFX1-]: RenderCompositorSWGL failed mapping default framebuffer, no dt
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at /tmp/rust_mozprofileWX0Wcu/search.json.mozlz4", (void 0)))
+DevTools listening on ws://localhost:39515/devtools/browser/42ffc26b-4e64-4ab5-bf21-db15a0c826f0
+1653011777217	Marionette	INFO	Listening on port 46299
+Read port: 46299
+1653011777327	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+JavaScript warning: https://pagead2.googlesyndication.com/bg/AAcrpHDydyl_zLrsUqLIoJaIpM6fuyfNuw3JGtq9cUA.js line 1 > eval line 6973 > eval line 1 > eval line 1 > eval, line 1: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+Exiting due to channel error.
+Exiting due to channel error.
+Exiting due to channel error.
+1653011799945	geckodriver	INFO	Listening on 127.0.0.1:42591
+1653011799950	mozrunner::runner	INFO	Running command: "/usr/local/bin/firefox" "--marionette" "-headless" "--remote-debugging-port" "46295" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "/tmp/rust_mozprofileBJet0M"
+*** You are running in headless mode.
+1653011800345	Marionette	INFO	Marionette enabled
+[GFX1-]: RenderCompositorSWGL failed mapping default framebuffer, no dt
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at /tmp/rust_mozprofileBJet0M/search.json.mozlz4", (void 0)))
+DevTools listening on ws://localhost:46295/devtools/browser/26d83257-25dc-4a41-af96-397bcab8fd11
+1653011801667	Marionette	INFO	Listening on port 37485
+Read port: 37485
+1653011801779	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+JavaScript warning: https://pagead2.googlesyndication.com/bg/AAcrpHDydyl_zLrsUqLIoJaIpM6fuyfNuw3JGtq9cUA.js line 1 > eval line 4941 > eval line 1 > eval line 1 > eval, line 1: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+1653011939411	geckodriver	INFO	Listening on 127.0.0.1:45719
+1653011939416	mozrunner::runner	INFO	Running command: "/usr/local/bin/firefox" "--marionette" "-headless" "--remote-debugging-port" "51599" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "/tmp/rust_mozprofilesgYT4q"
+*** You are running in headless mode.
+1653011939822	Marionette	INFO	Marionette enabled
+[GFX1-]: RenderCompositorSWGL failed mapping default framebuffer, no dt
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at /tmp/rust_mozprofilesgYT4q/search.json.mozlz4", (void 0)))
+DevTools listening on ws://localhost:51599/devtools/browser/eb24fd38-bcde-48f8-9f8b-26d9d14615e1
+1653011941140	Marionette	INFO	Listening on port 46243
+Read port: 46243
+1653011941245	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+JavaScript warning: https://pagead2.googlesyndication.com/bg/AAcrpHDydyl_zLrsUqLIoJaIpM6fuyfNuw3JGtq9cUA.js line 1 > eval line 4775 > eval line 1 > eval line 1 > eval, line 1: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+Exiting due to channel error.
+Exiting due to channel error.
+Exiting due to channel error.
+1653012252095	geckodriver	INFO	Listening on 127.0.0.1:42047
+1653012252099	mozrunner::runner	INFO	Running command: "/usr/local/bin/firefox" "--marionette" "-headless" "--remote-debugging-port" "56393" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "/tmp/rust_mozprofileoKoBrk"
+*** You are running in headless mode.
+1653012252509	Marionette	INFO	Marionette enabled
+[GFX1-]: RenderCompositorSWGL failed mapping default framebuffer, no dt
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at /tmp/rust_mozprofileoKoBrk/search.json.mozlz4", (void 0)))
+DevTools listening on ws://localhost:56393/devtools/browser/263669a1-6aa3-44c1-b8b8-44f0c4776bc4
+1653012253768	Marionette	INFO	Listening on port 41117
+Read port: 41117
+1653012253816	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+JavaScript warning: https://pagead2.googlesyndication.com/bg/AAcrpHDydyl_zLrsUqLIoJaIpM6fuyfNuw3JGtq9cUA.js line 1 > eval line 3235 > eval line 1 > eval line 1 > eval, line 1: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+Exiting due to channel error.
+Exiting due to channel error.
+Exiting due to channel error.
+1653012339087	geckodriver	INFO	Listening on 127.0.0.1:60817
+1653012339091	mozrunner::runner	INFO	Running command: "/usr/local/bin/firefox" "--marionette" "-headless" "--remote-debugging-port" "38115" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "/tmp/rust_mozprofilelRmBUY"
+*** You are running in headless mode.
+1653012339456	Marionette	INFO	Marionette enabled
+[GFX1-]: RenderCompositorSWGL failed mapping default framebuffer, no dt
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at /tmp/rust_mozprofilelRmBUY/search.json.mozlz4", (void 0)))
+DevTools listening on ws://localhost:38115/devtools/browser/d0391b30-ca40-4e01-adc8-d1f73da8f4d6
+1653012340760	Marionette	INFO	Listening on port 40093
+Read port: 40093
+1653012340828	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+JavaScript warning: https://pagead2.googlesyndication.com/bg/AAcrpHDydyl_zLrsUqLIoJaIpM6fuyfNuw3JGtq9cUA.js line 1 > eval line 6731 > eval line 1 > eval line 1 > eval, line 1: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+1653012844281	geckodriver	INFO	Listening on 127.0.0.1:39127
+1653012844286	mozrunner::runner	INFO	Running command: "/usr/local/bin/firefox" "--marionette" "-headless" "--remote-debugging-port" "56101" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "/tmp/rust_mozprofilep6QxX9"
+*** You are running in headless mode.
+1653012844686	Marionette	INFO	Marionette enabled
+[GFX1-]: RenderCompositorSWGL failed mapping default framebuffer, no dt
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at /tmp/rust_mozprofilep6QxX9/search.json.mozlz4", (void 0)))
+DevTools listening on ws://localhost:56101/devtools/browser/00360a06-7881-4c1d-abfe-a986f335fa30
+1653012846051	Marionette	INFO	Listening on port 46173
+Read port: 46173
+1653012846132	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+JavaScript warning: https://pagead2.googlesyndication.com/bg/AAcrpHDydyl_zLrsUqLIoJaIpM6fuyfNuw3JGtq9cUA.js line 1 > eval line 1346 > eval line 1 > eval line 1 > eval, line 1: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+JavaScript error: https://http2.mlstatic.com/frontend-assets/vpp-frontend/commons.68e693f0.js, line 2: Error: Request aborted
+JavaScript error: https://http2.mlstatic.com/frontend-assets/vpp-frontend/commons.68e693f0.js, line 2: Error: Request aborted
+JavaScript error: https://http2.mlstatic.com/frontend-assets/vpp-frontend/commons.68e693f0.js, line 2: Error: Request aborted
+1653013268744	geckodriver	INFO	Listening on 127.0.0.1:34813
+1653013268750	mozrunner::runner	INFO	Running command: "/usr/local/bin/firefox" "--marionette" "-headless" "--remote-debugging-port" "49603" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "/tmp/rust_mozprofilewYY8H5"
+*** You are running in headless mode.
+1653013269267	Marionette	INFO	Marionette enabled
+[GFX1-]: RenderCompositorSWGL failed mapping default framebuffer, no dt
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at /tmp/rust_mozprofilewYY8H5/search.json.mozlz4", (void 0)))
+DevTools listening on ws://localhost:49603/devtools/browser/21f6338b-7b92-41e8-ba44-3fc136a96820
+1653013270896	Marionette	INFO	Listening on port 46165
+Read port: 46165
+1653013270977	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+JavaScript warning: https://pagead2.googlesyndication.com/bg/AAcrpHDydyl_zLrsUqLIoJaIpM6fuyfNuw3JGtq9cUA.js line 1 > eval line 6693 > eval line 1 > eval line 1 > eval, line 1: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+1653013470104	geckodriver	INFO	Listening on 127.0.0.1:49863
+1653013470110	mozrunner::runner	INFO	Running command: "/usr/local/bin/firefox" "--marionette" "-headless" "--remote-debugging-port" "52205" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "/tmp/rust_mozprofileXHlll9"
+*** You are running in headless mode.
+1653013470513	Marionette	INFO	Marionette enabled
+[GFX1-]: RenderCompositorSWGL failed mapping default framebuffer, no dt
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at /tmp/rust_mozprofileXHlll9/search.json.mozlz4", (void 0)))
+DevTools listening on ws://localhost:52205/devtools/browser/479e6784-9d8c-4c1a-976b-30a60d56599e
+1653013471950	Marionette	INFO	Listening on port 36411
+Read port: 36411
+1653013472031	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+JavaScript warning: https://pagead2.googlesyndication.com/bg/AAcrpHDydyl_zLrsUqLIoJaIpM6fuyfNuw3JGtq9cUA.js line 1 > eval line 315 > eval line 1 > eval line 1 > eval, line 1: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+1653013538762	geckodriver	INFO	Listening on 127.0.0.1:57697
+1653013538767	mozrunner::runner	INFO	Running command: "/usr/local/bin/firefox" "--marionette" "-headless" "--remote-debugging-port" "39609" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "/tmp/rust_mozprofile3d7cMa"
+*** You are running in headless mode.
+1653013539176	Marionette	INFO	Marionette enabled
+[GFX1-]: RenderCompositorSWGL failed mapping default framebuffer, no dt
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at /tmp/rust_mozprofile3d7cMa/search.json.mozlz4", (void 0)))
+DevTools listening on ws://localhost:39609/devtools/browser/4df116e8-a942-45e6-8b5a-1a7c7c412226
+1653013540648	Marionette	INFO	Listening on port 41607
+Read port: 41607
+1653013540689	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+JavaScript warning: https://pagead2.googlesyndication.com/bg/AAcrpHDydyl_zLrsUqLIoJaIpM6fuyfNuw3JGtq9cUA.js line 1 > eval line 179 > eval line 1 > eval line 1 > eval, line 1: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+JavaScript error: https://http2.mlstatic.com/frontend-assets/vpp-frontend/commons.68e693f0.js, line 2: Error: Request aborted
+JavaScript error: https://http2.mlstatic.com/frontend-assets/vpp-frontend/commons.68e693f0.js, line 2: Error: Request aborted
+1653013657892	geckodriver	INFO	Listening on 127.0.0.1:47459
+1653013657897	mozrunner::runner	INFO	Running command: "/usr/local/bin/firefox" "--marionette" "-headless" "--remote-debugging-port" "42421" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "/tmp/rust_mozprofileurpDOr"
+*** You are running in headless mode.
+1653013658378	Marionette	INFO	Marionette enabled
+[GFX1-]: RenderCompositorSWGL failed mapping default framebuffer, no dt
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at /tmp/rust_mozprofileurpDOr/search.json.mozlz4", (void 0)))
+DevTools listening on ws://localhost:42421/devtools/browser/5d94ef5a-89e2-424f-9181-73e208200be6
+1653013660004	Marionette	INFO	Listening on port 36907
+Read port: 36907
+1653013660143	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+JavaScript warning: https://pagead2.googlesyndication.com/bg/AAcrpHDydyl_zLrsUqLIoJaIpM6fuyfNuw3JGtq9cUA.js line 1 > eval line 2333 > eval line 1 > eval line 1 > eval, line 1: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+1653013675802	Marionette	WARN	Ignoring event 'DOMContentLoaded' because document has an invalid readyState of 'complete'.
+1653013675803	Marionette	WARN	Ignoring event 'DOMContentLoaded' because document has an invalid readyState of 'complete'.
+1653013675806	Marionette	WARN	Ignoring event 'DOMContentLoaded' because document has an invalid readyState of 'complete'.
+1653013675807	Marionette	WARN	Ignoring event 'DOMContentLoaded' because document has an invalid readyState of 'complete'.
+JavaScript error: https://http2.mlstatic.com/frontend-assets/vpp-frontend/commons.68e693f0.js, line 2: Error: Request aborted
+Exiting due to channel error.
+Exiting due to channel error.
+Exiting due to channel error.
+1653013704328	geckodriver	INFO	Listening on 127.0.0.1:41645
+1653013704333	mozrunner::runner	INFO	Running command: "/usr/local/bin/firefox" "--marionette" "-headless" "--remote-debugging-port" "35027" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "/tmp/rust_mozprofilei9AiJ9"
+*** You are running in headless mode.
+1653013704739	Marionette	INFO	Marionette enabled
+[GFX1-]: RenderCompositorSWGL failed mapping default framebuffer, no dt
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at /tmp/rust_mozprofilei9AiJ9/search.json.mozlz4", (void 0)))
+DevTools listening on ws://localhost:35027/devtools/browser/f3d1f18f-e68c-453f-a82c-8242b8bdd2af
+1653013706200	Marionette	INFO	Listening on port 33653
+Read port: 33653
+1653013706254	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+JavaScript warning: https://pagead2.googlesyndication.com/bg/AAcrpHDydyl_zLrsUqLIoJaIpM6fuyfNuw3JGtq9cUA.js line 1 > eval line 1992 > eval line 1 > eval line 1 > eval, line 1: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+JavaScript error: https://http2.mlstatic.com/frontend-assets/vpp-frontend/commons.68e693f0.js, line 2: Error: Request aborted
+JavaScript error: https://http2.mlstatic.com/frontend-assets/vpp-frontend/commons.68e693f0.js, line 2: Error: Request aborted
+JavaScript error: https://http2.mlstatic.com/frontend-assets/vpp-frontend/commons.68e693f0.js, line 2: Error: Request aborted
+JavaScript error: https://http2.mlstatic.com/frontend-assets/vpp-frontend/commons.68e693f0.js, line 2: Error: Request aborted
+JavaScript error: https://http2.mlstatic.com/frontend-assets/vpp-frontend/commons.68e693f0.js, line 2: Error: Request aborted
+1653013745347	Marionette	WARN	Ignoring event 'DOMContentLoaded' because document has an invalid readyState of 'complete'.
+JavaScript error: https://http2.mlstatic.com/frontend-assets/vpp-frontend/commons.68e693f0.js, line 2: Error: Request aborted
+JavaScript error: https://http2.mlstatic.com/frontend-assets/vpp-frontend/commons.68e693f0.js, line 2: Error: Request aborted
+1653013757345	Marionette	WARN	Ignoring event 'DOMContentLoaded' because document has an invalid readyState of 'complete'.
+JavaScript error: https://http2.mlstatic.com/frontend-assets/vpp-frontend/commons.68e693f0.js, line 2: Error: Request aborted
+JavaScript error: https://http2.mlstatic.com/frontend-assets/vpp-frontend/commons.68e693f0.js, line 2: Error: Request aborted
+1653013761002	Marionette	WARN	Ignoring event 'DOMContentLoaded' because document has an invalid readyState of 'complete'.
+JavaScript error: https://http2.mlstatic.com/frontend-assets/vpp-frontend/commons.68e693f0.js, line 2: Error: Request aborted
+JavaScript error: https://http2.mlstatic.com/frontend-assets/vpp-frontend/commons.68e693f0.js, line 2: Error: Request aborted
+JavaScript error: https://http2.mlstatic.com/frontend-assets/vpp-frontend/commons.68e693f0.js, line 2: Error: Request aborted
+JavaScript error: https://http2.mlstatic.com/frontend-assets/vpp-frontend/commons.68e693f0.js, line 2: Error: Request aborted
+JavaScript error: https://http2.mlstatic.com/frontend-assets/vpp-frontend/commons.68e693f0.js, line 2: Error: Request aborted
+JavaScript error: https://http2.mlstatic.com/frontend-assets/vpp-frontend/commons.68e693f0.js, line 2: Error: Request aborted
+JavaScript error: https://http2.mlstatic.com/frontend-assets/vpp-frontend/commons.68e693f0.js, line 2: Error: Request aborted
+JavaScript error: https://http2.mlstatic.com/frontend-assets/vpp-frontend/commons.68e693f0.js, line 2: Error: Request aborted
+JavaScript error: https://http2.mlstatic.com/frontend-assets/vpp-frontend/commons.68e693f0.js, line 2: Error: Request aborted
+JavaScript error: https://http2.mlstatic.com/frontend-assets/vpp-frontend/commons.68e693f0.js, line 2: Error: Request aborted
+JavaScript error: https://http2.mlstatic.com/frontend-assets/vpp-frontend/commons.68e693f0.js, line 2: Error: Request aborted
+1653013787983	Marionette	WARN	Ignoring event 'DOMContentLoaded' because document has an invalid readyState of 'complete'.
+JavaScript error: https://http2.mlstatic.com/frontend-assets/vpp-frontend/commons.68e693f0.js, line 2: Error: Request aborted
+1653013795943	Marionette	WARN	Ignoring event 'DOMContentLoaded' because document has an invalid readyState of 'complete'.
+1653013795946	Marionette	WARN	Ignoring event 'DOMContentLoaded' because document has an invalid readyState of 'complete'.
+1653013795947	Marionette	WARN	Ignoring event 'DOMContentLoaded' because document has an invalid readyState of 'complete'.
+1653013795948	Marionette	WARN	Ignoring event 'DOMContentLoaded' because document has an invalid readyState of 'complete'.
+JavaScript error: https://http2.mlstatic.com/frontend-assets/vpp-frontend/commons.68e693f0.js, line 2: Error: Request aborted
+1653013805359	Marionette	WARN	Ignoring event 'DOMContentLoaded' because document has an invalid readyState of 'complete'.
+1653013834448	Marionette	WARN	Ignoring event 'DOMContentLoaded' because document has an invalid readyState of 'complete'.
+1653013834450	Marionette	WARN	Ignoring event 'DOMContentLoaded' because document has an invalid readyState of 'complete'.
+1653013834451	Marionette	WARN	Ignoring event 'DOMContentLoaded' because document has an invalid readyState of 'complete'.
+1653013834453	Marionette	WARN	Ignoring event 'DOMContentLoaded' because document has an invalid readyState of 'complete'.
+JavaScript error: https://http2.mlstatic.com/frontend-assets/vpp-frontend/commons.68e693f0.js, line 2: Error: Request aborted
+JavaScript error: https://http2.mlstatic.com/frontend-assets/vpp-frontend/commons.68e693f0.js, line 2: Error: Request aborted
+JavaScript error: https://http2.mlstatic.com/frontend-assets/vpp-frontend/commons.68e693f0.js, line 2: Error: Request aborted
+1653013847089	Marionette	WARN	Ignoring event 'DOMContentLoaded' because document has an invalid readyState of 'complete'.
+1653013847089	Marionette	WARN	Ignoring event 'DOMContentLoaded' because document has an invalid readyState of 'complete'.
+1653013847098	Marionette	WARN	Ignoring event 'DOMContentLoaded' because document has an invalid readyState of 'complete'.
+1653013847099	Marionette	WARN	Ignoring event 'DOMContentLoaded' because document has an invalid readyState of 'complete'.
+JavaScript error: https://http2.mlstatic.com/frontend-assets/vpp-frontend/commons.68e693f0.js, line 2: Error: Request aborted
+JavaScript error: https://http2.mlstatic.com/frontend-assets/vpp-frontend/commons.68e693f0.js, line 2: Error: Request aborted
+1653013853287	Marionette	WARN	Ignoring event 'DOMContentLoaded' because document has an invalid readyState of 'complete'.
+1653013853323	Marionette	WARN	Ignoring event 'DOMContentLoaded' because document has an invalid readyState of 'complete'.
+1653013853325	Marionette	WARN	Ignoring event 'DOMContentLoaded' because document has an invalid readyState of 'complete'.
+1653013853329	Marionette	WARN	Ignoring event 'DOMContentLoaded' because document has an invalid readyState of 'complete'.
+1653013853329	Marionette	WARN	Ignoring event 'DOMContentLoaded' because document has an invalid readyState of 'complete'.
+JavaScript error: https://http2.mlstatic.com/frontend-assets/vpp-frontend/commons.68e693f0.js, line 2: Error: Request aborted
+JavaScript error: https://http2.mlstatic.com/frontend-assets/vpp-frontend/commons.68e693f0.js, line 2: Error: Request aborted
+JavaScript error: https://http2.mlstatic.com/frontend-assets/vpp-frontend/commons.68e693f0.js, line 2: Error: Request aborted
+1653013879140	Marionette	WARN	Ignoring event 'DOMContentLoaded' because document has an invalid readyState of 'complete'.

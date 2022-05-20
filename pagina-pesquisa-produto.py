@@ -21,7 +21,7 @@ sleep(2)
 # Descendo a pagina para carregar todos os produtos
 body = navegador.find_element(By.CSS_SELECTOR, "body")
 
-for i in range(1, 30):
+for i in range(1, 20):
     body.send_keys(Keys.PAGE_DOWN)
 sleep(4)
 
@@ -30,7 +30,7 @@ page_content = navegador.page_source
 site = BeautifulSoup(page_content, 'html.parser')
 
 # Quantidade de anúncios normal
-product_normal_quantity = site.find('span', class_="ui-search-search-result__quantity-results").getText()
+#product_normal_quantity = site.find('span', class_="ui-search-search-result__quantity-results").getText()
 
 # Container de Produtos
 container = site.find(class_='ui-search-results')
@@ -45,13 +45,12 @@ products_price = []
 products_quantity = []
 
 # Acessa cada produto do Container da Categoria
-for i in range(len(product_link)):
-    print("=" * 10)
-    print(i)
+products_length = len(product_link)
+for i in range(products_length):
+    print('{} / {}'.format(i, products_length))
     # Acessa página
     navegador.get(product_link[i])
-    print(navegador.current_url)
-    sleep(2)
+    sleep(1)
 
     # Salva pagina
     page_content = navegador.page_source
@@ -62,32 +61,16 @@ for i in range(len(product_link)):
 
     # Price
     price_fraction = product_side_info.find('span', class_ = 'andes-money-amount__fraction').getText()
-    print(price_fraction)
 
     # Quantity
-    quantity = product_side_info('span', class_ = 'ui-pdp-subtitle').getText()
-    print(quantity)
+    quantity = product_side_info.find('span', class_ = 'ui-pdp-subtitle').getText()
 
     products_price.append(price_fraction)
     products_quantity.append(quantity)
 
-print(products_price)
-print(products_quantity)
-print("mean" * 10 )
-print('price')
-print(statistics.mean(products_price))
-print('quantity')
-print(statistics.mean((products_quantity)))
-print("median" * 10 )
-print('price')
-print(statistics.median(products_price))
-print('quantity')
-print(statistics.median((products_quantity)))
 
-
-
-
-
+# String p/ Int Price
+products_price = list(map(int, products_price))
 
 
 
