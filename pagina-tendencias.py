@@ -38,4 +38,5 @@ product_list = carrousel_grow.findAll('div', class_='entry-column')
 # Buscando produtos e salvando em uma lista
 product_name_grow = [p.find('p', class_ = 'ui-search-entry-keyword').getText() for p in product_list]
 product_position_grow = [p.find('div', class_ = 'ui-search-entry-description').getText() for p in product_list]
-print(product_position_grow)
+product_link_grow = [p.find('a', href=True).get('href').replace('#trend', '') for p in product_list]
+print(product_link_grow)
