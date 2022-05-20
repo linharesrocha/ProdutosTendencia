@@ -8,13 +8,12 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 import pandas as pd
 from datetime import datetime
-from time import sleep
 import statistics
 import re
 
 # Configurações
 option = Options()
-option.headless = False
+option.headless = True
 navegador = webdriver.Firefox(options=option)
 navegador.maximize_window()
 
@@ -35,7 +34,6 @@ def pagina_gategoria_tendencia():
 
     try:
         element_present = EC.presence_of_element_located((By.CLASS_NAME, 'ui-search-entry-keyword'))
-        print(element_present)
         WebDriverWait(navegador, 10).until(element_present)
     except TimeoutException:
         print("Timed out waiting for page to load")
@@ -81,13 +79,17 @@ def pagina_pesquisa_produto(data_grow):
         print(url)
 
         navegador.get(url)
-        sleep(2)
 
         body = navegador.find_element(By.CSS_SELECTOR, "body")
 
         for i in range(1, 20):
             body.send_keys(Keys.PAGE_DOWN)
-        sleep(4)
+
+        try:
+            element_present = EC.presence_of_element_located((By.CLASS_NAME, 'ui-search-search-result__quantity-results'))
+            WebDriverWait(navegador, 10).until(element_present)
+        except TimeoutException:
+            print("Timed out waiting for page to load")
 
         page_content = navegador.page_source
         site = BeautifulSoup(page_content, 'html.parser')
@@ -108,7 +110,6 @@ def pagina_pesquisa_produto(data_grow):
             product_full_quantity = 'NaoTem'
 
             navegador.get(url)
-            sleep(1)
 
             page_content = navegador.page_source
             site = BeautifulSoup(page_content, 'html.parser')
@@ -162,10 +163,10 @@ def pagina_pesquisa_produto(data_grow):
         products_price_list = list(map(int, products_price))
         products_sales_list = list(map(int, products_sales))
 
-        products_sales_mean = statistics.mean(products_sales_list)
-        products_price_mean = statistics.mean(products_price_list)
-        products_sales_median = statistics.median(products_sales_list)
-        products_price_median = statistics.median(products_price_list)
+        products_sales_mean = round(statistics.mean(products_sales_list), 2)
+        products_price_mean = round(statistics.mean(products_price_list),2)
+        products_sales_median = round(statistics.median(products_sales_list),2)
+        products_price_median = round(statistics.median(products_price_list),2)
 
         data_grow.loc[z, 'Qnt-Normal'] = product_normal_quantity
         data_grow.loc[z, 'Qnt-FULL'] = product_full_quantity
