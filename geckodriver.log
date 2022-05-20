@@ -830,3 +830,239 @@ JavaScript error: https://http2.mlstatic.com/frontend-assets/vpp-frontend/common
 JavaScript error: https://http2.mlstatic.com/frontend-assets/vpp-frontend/commons.68e693f0.js, line 2: Error: Request aborted
 JavaScript error: https://http2.mlstatic.com/frontend-assets/vpp-frontend/commons.68e693f0.js, line 2: Error: Request aborted
 1653013879140	Marionette	WARN	Ignoring event 'DOMContentLoaded' because document has an invalid readyState of 'complete'.
+1653041918356	geckodriver	INFO	Listening on 127.0.0.1:64248
+1653041921451	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--remote-debugging-port" "64249" "-no-remote" "-profile" "C:\\Users\\FAT-01\\AppData\\Local\\Temp\\rust_mozprofile9Cmu88"
+1653041921998	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\FAT-01\\AppData\\Local\\Temp\\rust_mozprofile9Cmu88\\search.json.mozlz4", (void 0)))
+DevTools listening on ws://localhost:64249/devtools/browser/4f43959a-14fa-4664-9747-4ab6c1e1ec49
+1653041923891	Marionette	INFO	Listening on port 64254
+1653041924126	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+1653042125715	geckodriver	INFO	Listening on 127.0.0.1:64790
+1653042128813	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--remote-debugging-port" "64791" "-no-remote" "-profile" "C:\\Users\\FAT-01\\AppData\\Local\\Temp\\rust_mozprofilelA5VdT"
+1653042129335	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\FAT-01\\AppData\\Local\\Temp\\rust_mozprofilelA5VdT\\search.json.mozlz4", (void 0)))
+DevTools listening on ws://localhost:64791/devtools/browser/6b7cf78a-0d58-4f6c-a66e-2c7dbdb44a15
+1653042131117	Marionette	INFO	Listening on port 64796
+1653042131477	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+1653042170898	Marionette	INFO	Stopped listening on port 64796
+console.warn: TopSitesFeed: Failed to fetch data from Contile server: NetworkError when attempting to fetch resource.
+
+###!!! [Parent][PGPUParent] Error: RunMessage(msgname=PGPU::Msg_ShutdownVR) Channel closing: too late to send/recv, messages will be lost
+
+1653042173195	geckodriver	INFO	Listening on 127.0.0.1:64882
+1653042176298	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--remote-debugging-port" "64883" "-no-remote" "-profile" "C:\\Users\\FAT-01\\AppData\\Local\\Temp\\rust_mozprofileinsnH5"
+1653042176546	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\FAT-01\\AppData\\Local\\Temp\\rust_mozprofileinsnH5\\search.json.mozlz4", (void 0)))
+DevTools listening on ws://localhost:64883/devtools/browser/21945860-4139-4bb8-814f-779baddf0897
+1653042177978	Marionette	INFO	Listening on port 64888
+1653042178353	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+1653042188015	Marionette	INFO	Stopped listening on port 64888
+console.warn: TopSitesFeed: Failed to fetch data from Contile server: NetworkError when attempting to fetch resource.
+1653042918026	geckodriver	INFO	Listening on 127.0.0.1:65050
+1653042921097	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--remote-debugging-port" "65051" "-no-remote" "-profile" "C:\\Users\\FAT-01\\AppData\\Local\\Temp\\rust_mozprofileb7vSVe"
+1653042921326	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\FAT-01\\AppData\\Local\\Temp\\rust_mozprofileb7vSVe\\search.json.mozlz4", (void 0)))
+DevTools listening on ws://localhost:65051/devtools/browser/1f94101f-7c20-41bf-80b8-e987cc5f8121
+1653042922806	Marionette	INFO	Listening on port 65056
+1653042923137	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+JavaScript error: https://http2.mlstatic.com/frontend-assets/vpp-frontend/commons.68e693f0.js, line 2: Error: Request aborted
+JavaScript error: https://http2.mlstatic.com/frontend-assets/vpp-frontend/commons.68e693f0.js, line 2: Error: Request aborted
+JavaScript error: https://http2.mlstatic.com/frontend-assets/vpp-frontend/commons.68e693f0.js, line 2: Error: Request aborted
+JavaScript error: https://http2.mlstatic.com/frontend-assets/vpp-frontend/commons.68e693f0.js, line 2: Error: Request aborted
+1653043250857	Marionette	INFO	Stopped listening on port 65056
+console.warn: TopSitesFeed: Failed to fetch data from Contile server: NetworkError when attempting to fetch resource.
+remote-debugging-port" "65206" "-no-remote" "-profile" "C:\\Users\\FAT-01\\AppData\\Local\\Temp\\rust_mozprofileCd62em"
+1653043027992	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\FAT-01\\AppData\\Local\\Temp\\rust_mozprofileCd62em\\search.json.mozlz4", (void 0)))
+DevTools listening on ws://localhost:65206/devtools/browser/c4935d3d-78d4-424a-8135-c460fd3d0481
+1653043029533	Marionette	INFO	Listening on port 65211
+1653043029808	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+JavaScript error: https://http2.mlstatic.com/frontend-assets/vpp-frontend/commons.68e693f0.js, line 2: Error: Request aborted
+JavaScript error: https://http2.mlstatic.com/frontend-assets/vpp-frontend/commons.68e693f0.js, line 2: Error: Request aborted
+JavaScript error: https://http2.mlstatic.com/frontend-assets/vpp-frontend/commons.68e693f0.js, line 2: Error: Request aborted
+JavaScript error: https://http2.mlstatic.com/frontend-assets/vpp-frontend/commons.68e693f0.js, line 2: Error: Request aborted
+JavaScript error: https://http2.mlstatic.com/frontend-assets/vpp-frontend/commons.68e693f0.js, line 2: Error: Request aborted
+1653043064300	Marionette	INFO	Stopped listening on port 65211
+console.warn: TopSitesFeed: Failed to fetch data from Contile server: NetworkError when attempting to fetch resource.
+
+###!!! [Parent][PGPUParent] Error: RunMessage(msgname=PGPU::Msg_ShutdownVR) Channel closing: too late to send/recv, messages will be lost
+
+1653043250607	geckodriver	INFO	Listening on 127.0.0.1:65383
+1653043253699	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--remote-debugging-port" "65384" "-no-remote" "-profile" "C:\\Users\\FAT-01\\AppData\\Local\\Temp\\rust_mozprofilejQwb9e"
+1653043253923	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\FAT-01\\AppData\\Local\\Temp\\rust_mozprofilejQwb9e\\search.json.mozlz4", (void 0)))
+DevTools listening on ws://localhost:65384/devtools/browser/d3d41833-1bb4-4448-8f57-405199e92ad2
+1653043255355	Marionette	INFO	Listening on port 65391
+1653043255764	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+JavaScript error: https://http2.mlstatic.com/frontend-assets/vpp-frontend/commons.68e693f0.js, line 2: Error: Request aborted
+JavaScript error: https://http2.mlstatic.com/frontend-assets/vpp-frontend/commons.68e693f0.js, line 2: Error: Request aborted
+JavaScript error: https://http2.mlstatic.com/frontend-assets/vpp-frontend/commons.68e693f0.js, line 2: Error: Request aborted
+JavaScript error: https://http2.mlstatic.com/frontend-assets/vpp-frontend/commons.68e693f0.js, line 2: Error: Request aborted
+JavaScript error: https://http2.mlstatic.com/frontend-assets/vpp-frontend/commons.68e693f0.js, line 2: Error: Request aborted
+JavaScript error: https://http2.mlstatic.com/frontend-assets/vpp-frontend/commons.68e693f0.js, line 2: Error: Request aborted
+JavaScript warning: https://pagead2.googlesyndication.com/bg/6nbJiuMIfbM3CrNY-tDIjyCddJisSKcO9ZWp-sVJINc.js line 1 > eval line 6691 > eval line 1 > eval line 1 > eval, line 1: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+1653043337794	Marionette	INFO	Stopped listening on port 65391
+console.warn: TopSitesFeed: Failed to fetch data from Contile server: NetworkError when attempting to fetch resource.
+
+###!!! [Parent][PGPUParent] Error: RunMessage(msgname=PGPU::Msg_ShutdownVR) Channel closing: too late to send/recv, messages will be lost
+
+1653043514646	geckodriver	INFO	Listening on 127.0.0.1:49196
+1653043517743	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--remote-debugging-port" "49197" "-no-remote" "-profile" "C:\\Users\\FAT-01\\AppData\\Local\\Temp\\rust_mozprofileV5Md5o"
+1653043517993	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\FAT-01\\AppData\\Local\\Temp\\rust_mozprofileV5Md5o\\search.json.mozlz4", (void 0)))
+DevTools listening on ws://localhost:49197/devtools/browser/90b5f504-933b-44ee-a604-e3368d3d6a2f
+1653043519736	Marionette	INFO	Listening on port 49202
+1653043519795	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+JavaScript error: https://http2.mlstatic.com/frontend-assets/vpp-frontend/commons.68e693f0.js, line 2: Error: Request aborted
+JavaScript error: https://http2.mlstatic.com/frontend-assets/vpp-frontend/commons.68e693f0.js, line 2: Error: Request aborted
+JavaScript error: https://http2.mlstatic.com/frontend-assets/vpp-frontend/commons.68e693f0.js, line 2: Error: Request aborted
+JavaScript error: https://http2.mlstatic.com/frontend-assets/vpp-frontend/commons.68e693f0.js, line 2: Error: Request aborted
+JavaScript error: https://http2.mlstatic.com/frontend-assets/vpp-frontend/commons.68e693f0.js, line 2: Error: Request aborted
+JavaScript error: https://http2.mlstatic.com/frontend-assets/vpp-frontend/commons.68e693f0.js, line 2: Error: Request aborted
+1653043968590	Marionette	INFO	Stopped listening on port 49202
+console.warn: TopSitesFeed: Failed to fetch data from Contile server: NetworkError when attempting to fetch resource.
+1653044191958	geckodriver	INFO	Listening on 127.0.0.1:49810
+1653044195028	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--remote-debugging-port" "49811" "-no-remote" "-profile" "C:\\Users\\FAT-01\\AppData\\Local\\Temp\\rust_mozprofile7wDPyx"
+1653044195254	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\FAT-01\\AppData\\Local\\Temp\\rust_mozprofile7wDPyx\\search.json.mozlz4", (void 0)))
+DevTools listening on ws://localhost:49811/devtools/browser/ac913700-372c-4afc-a9cd-c4788a352ee5
+1653044196764	Marionette	INFO	Listening on port 49816
+1653044197075	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+JavaScript error: https://http2.mlstatic.com/frontend-assets/vpp-frontend/commons.68e693f0.js, line 2: Error: Request aborted
+JavaScript error: https://http2.mlstatic.com/frontend-assets/vpp-frontend/commons.68e693f0.js, line 2: Error: Request aborted
+JavaScript error: https://http2.mlstatic.com/frontend-assets/vpp-frontend/commons.68e693f0.js, line 2: Error: Request aborted
+1653044252694	Marionette	INFO	Stopped listening on port 49816
+console.warn: TopSitesFeed: Failed to fetch data from Contile server: NetworkError when attempting to fetch resource.
+1653044302934	geckodriver	INFO	Listening on 127.0.0.1:49989
+1653044306021	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--remote-debugging-port" "49990" "-no-remote" "-profile" "C:\\Users\\FAT-01\\AppData\\Local\\Temp\\rust_mozprofilexBujo4"
+1653044306248	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\FAT-01\\AppData\\Local\\Temp\\rust_mozprofilexBujo4\\search.json.mozlz4", (void 0)))
+DevTools listening on ws://localhost:49990/devtools/browser/f769c3f1-4a90-4cde-ab82-0256a5a6fbea
+1653044307718	Marionette	INFO	Listening on port 49995
+1653044308071	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+JavaScript error: https://http2.mlstatic.com/frontend-assets/vpp-frontend/commons.68e693f0.js, line 2: Error: Request aborted
+JavaScript error: https://http2.mlstatic.com/frontend-assets/vpp-frontend/commons.68e693f0.js, line 2: Error: Request aborted
+JavaScript error: https://http2.mlstatic.com/frontend-assets/vpp-frontend/commons.68e693f0.js, line 2: Error: Request aborted
+1653044474643	Marionette	INFO	Stopped listening on port 49995
+console.warn: TopSitesFeed: Failed to fetch data from Contile server: NetworkError when attempting to fetch resource.
+
+###!!! [Parent][PGPUParent] Error: RunMessage(msgname=PGPU::Msg_ShutdownVR) Channel closing: too late to send/recv, messages will be lost
+
+1653044480545	geckodriver	INFO	Listening on 127.0.0.1:50224
+1653044483622	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--remote-debugging-port" "50225" "-no-remote" "-profile" "C:\\Users\\FAT-01\\AppData\\Local\\Temp\\rust_mozprofilenXdfQK"
+1653044483847	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\FAT-01\\AppData\\Local\\Temp\\rust_mozprofilenXdfQK\\search.json.mozlz4", (void 0)))
+DevTools listening on ws://localhost:50225/devtools/browser/b56a763b-e267-4951-859a-57ed947d5560
+1653044485258	Marionette	INFO	Listening on port 50230
+1653044485668	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+JavaScript error: https://http2.mlstatic.com/frontend-assets/vpp-frontend/commons.68e693f0.js, line 2: Error: Request aborted
+JavaScript error: https://http2.mlstatic.com/frontend-assets/vpp-frontend/commons.68e693f0.js, line 2: Error: Request aborted
+JavaScript error: https://http2.mlstatic.com/frontend-assets/vpp-frontend/commons.68e693f0.js, line 2: Error: Request aborted
+JavaScript error: https://http2.mlstatic.com/frontend-assets/vpp-frontend/commons.68e693f0.js, line 2: Error: Request aborted
+1653044567986	Marionette	INFO	Stopped listening on port 50231653044568396	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--remote-debugging-port" "50392" "-no-remote" "-profile" "C:\\Users\\FAT-01\\AppData\\Local\\Temp\\rust_mozprofilebBkKA8"
+1653044568647	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\FAT-01\\AppData\\Local\\Temp\\rust_mozprofilebBkKA8\\search.json.mozlz4", (void 0)))
+DevTools listening on ws://localhost:50392/devtools/browser/b2268bea-9c90-4ae5-b6ec-ae55d46b9061
+1653044570065	Marionette	INFO	Listening on port 50400
+1653044570451	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+JavaScript error: https://http2.mlstatic.com/frontend-assets/vpp-frontend/commons.68e693f0.js, line 2: Error: Request aborted
+JavaScript error: https://http2.mlstatic.com/frontend-assets/vpp-frontend/commons.68e693f0.js, line 2: Error: Request aborted
+1653044960381	Marionette	INFO	Stopped listening on port 50400
+console.warn: TopSitesFeed: Failed to fetch data from Contile server: NetworkError when attempting to fetch resource.
+console.error: services.settings: 
+  Message: TypeError: NetworkError: Network request failed
+  Stack:
+    fetch/</request.onerror@resource://services-settings/Utils.jsm:154:26
+
+ SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\FAT-01\\AppData\\Local\\Temp\\rust_mozprofiledFrzOC\\search.json.mozlz4", (void 0)))
+DevTools listening on ws://localhost:50563/devtools/browser/73410f72-8cfa-4529-80fa-0d77c22f3480
+1653044642601	Marionette	INFO	Listening on port 50568
+1653044642995	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+JavaScript error: https://http2.mlstatic.com/frontend-assets/vpp-frontend/commons.68e693f0.js, line 2: Error: Request aborted
+JavaScript error: https://http2.mlstatic.com/frontend-assets/vpp-frontend/commons.68e693f0.js, line 2: Error: Request aborted
+JavaScript error: https://http2.mlstatic.com/frontend-assets/vpp-frontend/commons.68e693f0.js, line 2: Error: Request aborted
+JavaScript error: https://http2.mlstatic.com/frontend-assets/vpp-frontend/commons.68e693f0.js, line 2: Error: Request aborted
+JavaScript error: https://http2.mlstatic.com/frontend-assets/vpp-frontend/commons.68e693f0.js, line 2: Error: Request aborted
+JavaScript error: https://http2.mlstatic.com/frontend-assets/vpp-frontend/commons.68e693f0.js, line 2: Error: Request aborted
+JavaScript error: https://http2.mlstatic.com/frontend-assets/vpp-frontend/commons.68e693f0.js, line 2: Error: Request aborted
+JavaScript error: https://http2.mlstatic.com/frontend-assets/vpp-frontend/commons.68e693f0.js, line 2: Error: Request aborted
+JavaScript error: https://http2.mlstatic.com/frontend-assets/vpp-frontend/commons.68e693f0.js, line 2: Error: Request aborted
+1653044959277	Marionette	INFO	Stopped listening on port 50561653044962002	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--remote-debugging-port" "50750" "-no-remote" "-profile" "C:\\Users\\FAT-01\\AppData\\Local\\Temp\\rust_mozprofileBQKqbd"
+1653044962229	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\FAT-01\\AppData\\Local\\Temp\\rust_mozprofileBQKqbd\\search.json.mozlz4", (void 0)))
+DevTools listening on ws://localhost:50750/devtools/browser/7525f5b7-08a8-4939-9efb-452a6c7504da
+1653044963620	Marionette	INFO	Listening on port 50764
+1653044964044	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+JavaScript error: https://http2.mlstatic.com/frontend-assets/vpp-frontend/commons.68e693f0.js, line 2: Error: Request aborted
+JavaScript error: https://http2.mlstatic.com/frontend-assets/vpp-frontend/commons.68e693f0.js, line 2: Error: Request aborted
+JavaScript error: https://http2.mlstatic.com/frontend-assets/vpp-frontend/commons.68e693f0.js, line 2: Error: Request aborted
+JavaScript error: https://http2.mlstatic.com/frontend-assets/vpp-frontend/commons.68e693f0.js, line 2: Error: Request aborted
+JavaScript error: https://http2.mlstatic.com/frontend-assets/vpp-frontend/commons.68e693f0.js, line 2: Error: Request aborted
+1653045008387	Marionette	INFO	Stopped listening on port 50764
+console.warn: TopSitesFeed: Failed to fetch data from Contile server: NetworkError when attempting to fetch resource.
+1653045123306	geckodriver	INFO	Listening on 127.0.0.1:51038
+1653045126419	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--remote-debugging-port" "51039" "-no-remote" "-profile" "C:\\Users\\FAT-01\\AppData\\Local\\Temp\\rust_mozprofile78Q4oS"
+1653045126656	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\FAT-01\\AppData\\Local\\Temp\\rust_mozprofile78Q4oS\\search.json.mozlz4", (void 0)))
+DevTools listening on ws://localhost:51039/devtools/browser/c4923288-af7f-4bca-84d7-efa5d104024f
+1653045128083	Marionette	INFO	Listening on port 51045
+1653045128463	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+JavaScript error: https://http2.mlstatic.com/frontend-assets/vpp-frontend/commons.68e693f0.js, line 2: Error: Request aborted
+JavaScript error: https://http2.mlstatic.com/frontend-assets/vpp-frontend/commons.68e693f0.js, line 2: Error: Request aborted
+1653045160227	Marionette	INFO	Stopped listening on port 51045
+1653045204452	geckodriver	INFO	Listening on 127.0.0.1:51191
+1653045207553	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--remote-debugging-port" "51192" "-no-remote" "-profile" "C:\\Users\\FAT-01\\AppData\\Local\\Temp\\rust_mozprofileTvgw8J"
+1653045207800	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\FAT-01\\AppData\\Local\\Temp\\rust_mozprofileTvgw8J\\search.json.mozlz4", (void 0)))
+DevTools listening on ws://localhost:51192/devtools/browser/a4b17553-1532-48e9-8c5a-c2314f5319eb
+1653045209318	Marionette	INFO	Listening on port 51197
+1653045209615	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+JavaScript error: https://http2.mlstatic.com/frontend-assets/vpp-frontend/commons.68e693f0.js, line 2: Error: Request aborted
+JavaScript error: https://http2.mlstatic.com/frontend-assets/vpp-frontend/commons.68e693f0.js, line 2: Error: Request aborted
+JavaScript error: https://http2.mlstatic.com/frontend-assets/vpp-frontend/commons.68e693f0.js, line 2: Error: Request aborted
+JavaScript error: https://http2.mlstatic.com/frontend-assets/vpp-frontend/commons.68e693f0.js, line 2: Error: Request aborted
+1653045347942	Marionette	INFO	Stopped listening on port 51197
+console.warn: TopSitesFeed: Failed to fetch data from Contile server: NetworkError when attempting to fetch resource.
+1653045349504	geckodriver	INFO	Listening on 127.0.0.1:51352
+1653045352604	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--remote-debugging-port" "51353" "-no-remote" "-profile" "C:\\Users\\FAT-01\\AppData\\Local\\Temp\\rust_mozprofileBj566q"
+1653045352846	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\FAT-01\\AppData\\Local\\Temp\\rust_mozprofileBj566q\\search.json.mozlz4", (void 0)))
+DevTools listening on ws://localhost:51353/devtools/browser/5ab544ee-cc1a-4d1d-a959-7d6f9ee965c9
+1653045354345	Marionette	INFO	Listening on port 51358
+1653045354667	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+JavaScript error: https://http2.mlstatic.com/frontend-assets/vpp-frontend/commons.68e693f0.js, line 2: Error: Request aborted
+JavaScript error: https://http2.mlstatic.com/frontend-assets/vpp-frontend/commons.68e693f0.js, line 2: Error: Request aborted
+1653045385017	Marionette	INFO	Stopped listening on port 51358
+console.warn: TopSitesFeed: Failed to fetch data from Contile server: NetworkError when attempting to fetch resource.
+1653045402164	geckodriver	INFO	Listening on 127.0.0.1:51507
+1653045405239	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--remote-debugging-port" "51508" "-no-remote" "-profile" "C:\\Users\\FAT-01\\AppData\\Local\\Temp\\rust_mozprofilerddGqO"
+1653045405467	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\FAT-01\\AppData\\Local\\Temp\\rust_mozprofilerddGqO\\search.json.mozlz4", (void 0)))
+DevTools listening on ws://localhost:51508/devtools/browser/db733737-edcf-467c-8d9e-deeeca040323
+1653045406909	Marionette	INFO	Listening on port 51513
+1653045407285	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+JavaScript error: https://http2.mlstatic.com/frontend-assets/vpp-frontend/commons.68e693f0.js, line 2: Error: Request aborted
+JavaScript error: https://http2.mlstatic.com/frontend-assets/vpp-frontend/commons.68e693f0.js, line 2: Error: Request aborted
+JavaScript error: https://http2.mlstatic.com/frontend-assets/vpp-frontend/commons.68e693f0.js, line 2: Error: Request aborted
+JavaScript error: https://http2.mlstatic.com/frontend-assets/search-nordic/188.cefdf02d.js, line 2: Error: Request aborted
+JavaScript warning: https://pagead2.googlesyndication.com/bg/6nbJiuMIfbM3CrNY-tDIjyCddJisSKcO9ZWp-sVJINc.js line 1 > eval line 2610 > eval line 1 > eval line 1 > eval, line 1: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+JavaScript warning: https://produto.mercadolivre.com.br/MLB-2601828376-top-nadador-bojo-removivel-muvin-proteco-uv-50-academia-_JM?searchVariation=174366978205&vip_filters=shipping:fulfillment line 1 > injectedScript, line 1: Script terminated by timeout at:
+@https://produto.mercadolivre.com.br/MLB-2601828376-top-nadador-bojo-removivel-muvin-proteco-uv-50-academia-_JM?searchVariation=174366978205&vip_filters=shipping:fulfillment line 1 > injectedScript:1:289
+callDisInternal@https://sslwidget.criteo.com/event?a=3574&v=5.10.0&p0=e%3Dce%26m%3D%255B%255D%26h%3Dsha256&p1=e%3Dexd%26ci%3Dundefined%26site_type%3Dd%26ref%3Dhttps%253A%252F%252Froupas.mercadolivre.com.br&p2=e%3Dvp%26p%3DMLB2601828376&p3=e%3Ddis&adce=1&bundle=qqe4e19oMGhSSUJoazAlMkJ6dCUyRlk5enV0THBqY3ZBUHpac3NISDBRN056SnkxOWZvZXd4WVBvM0RrYyUyQmFLd1R3dlVUeVpnd2pVM0xBJTJCUm9SQUNiaGU0OUJrMlE2WUpLbHExb0cwb2RqamZqM0NWNSUyRnVXdnlFdDhtbUJRTmhGWCUyQjY2Nlg5OWNFT09TTCUyQmRKU1JhZVYlMkJEa1AyOVdobG5tQ0klMkJ4WHBvOFVBcHR6WW5EUUVON3A2OXpRdHlBV1AlMkZOamFnTkZHOA&tld=mercadolivre.com.br&dy=1&fu=https%3A%2F%2Fproduto.mercadolivre.com.br%2FMLB-2601828376-top-nadador-bojo-removivel-muvin-proteco-uv-50-academia-_JM%3FsearchVariation%3D174366978205%26vip_filters%3Dshipping%3Afulfillment%23searchVariation%3D174366978205%26position%3D5%26search_layout%3Dgrid%26type%3Ditem%26tracking_id%3D4d57e527-e4b4-431b-8d47-21f599c8e09f&dtycbr=81471:1:859
+c@https://sslwidget.criteo.com/event?a=3574&v=5.10.0&p0=e%3Dce%26m%3D%255B%255D%26h%3Dsha256&p1=e%3Dexd%26ci%3Dundefined%26site_type%3Dd%26ref%3Dhttps%253A%252F%252Froupas.mercadolivre.com.br&p2=e%3Dvp%26p%3DMLB2601828376&p3=e%3Ddis&adce=1&bundle=qqe4e19oMGhSSUJoazAlMkJ6dCUyRlk5enV0THBqY3ZBUHpac3NISDBRN056SnkxOWZvZXd4WVBvM0RrYyUyQmFLd1R3dlVUeVpnd2pVM0xBJTJCUm9SQUNiaGU0OUJrMlE2WUpLbHExb0cwb2RqamZqM0NWNSUyRnVXdnlFdDhtbUJRTmhGWCUyQjY2Nlg5OWNFT09TTCUyQmRKU1JhZVYlMkJEa1AyOVdobG5tQ0klMkJ4WHBvOFVBcHR6WW5EUUVON3A2OXpRdHlBV1AlMkZOamFnTkZHOA&tld=mercadolivre.com.br&dy=1&fu=https%3A%2F%2Fproduto.mercadolivre.com.br%2FMLB-2601828376-top-nadador-bojo-removivel-muvin-proteco-uv-50-academia-_JM%3FsearchVariation%3D174366978205%26vip_filters%3Dshipping%3Afulfillment%23searchVariation%3D174366978205%26position%3D5%26search_layout%3Dgrid%26type%3Ditem%26tracking_id%3D4d57e527-e4b4-431b-8d47-21f599c8e09f&dtycbr=81471:1:354
+nrWrapper@https://produto.mercadolivre.com.br/MLB-2601828376-top-nadador-bojo-removivel-muvin-proteco-uv-50-academia-_JM?searchVariation=174366978205&vip_filters=shipping:fulfillment#searchVariation=174366978205&position=5&search_layout=grid&type=item&tracking_id=4d57e527-e4b4-431b-8d47-21f599c8e09f:4:30145
+
+JavaScript warning: https://pagead2.googlesyndication.com/bg/6nbJiuMIfbM3CrNY-tDIjyCddJisSKcO9ZWp-sVJINc.js line 1 > eval line 4530 > eval line 1 > eval line 1 > eval, line 1: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+[Child 2384, MediaDecoderStateMachine #1] WARNING: 21ae9ce2660 Could not set cubeb stream name.: file /builds/worker/checkouts/gecko/dom/media/AudioStream.cpp:330
+[2022-05-20T11:21:42Z ERROR mp4parse] Found 2 nul bytes in "\u{0}\u{0}"
+[2022-05-20T11:21:42Z ERROR mp4parse] Found 2 nul bytes in "\u{0}\u{0}"
+[2022-05-20T11:21:42Z ERROR mp4parse] Found 2 nul bytes in "\u{0}\u{0}"
+[2022-05-20T11:21:42Z ERROR mp4parse] Found 2 nul bytes in "\u{0}\u{0}"
+[Child 8008, MediaDecoderStateMachine #1] WARNING: 1d3e1c27f20 Could not set cubeb stream name.: file /builds/worker/checkouts/gecko/dom/media/AudioStream.cpp:330
+JavaScript warning: https://pagead2.googlesyndication.com/bg/6nbJiuMIfbM3CrNY-tDIjyCddJisSKcO9ZWp-sVJINc.js line 1 > eval line 2169 > eval line 1 > eval line 1 > eval, line 1: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+1653045754978	Marionette	INFO	Stopped listening on port 51511653045756494	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--remote-debugging-port" "51876" "-no-remote" "-profile" "C:\\Users\\FAT-01\\AppData\\Local\\Temp\\rust_mozprofileXXvQXc"
+1653045756726	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\FAT-01\\AppData\\Local\\Temp\\rust_mozprofileXXvQXc\\search.json.mozlz4", (void 0)))
+DevTools listening on ws://localhost:51876/devtools/browser/79dbca32-78b8-4c45-9180-1ff45c1e0422
+1653045758175	Marionette	INFO	Listening on port 51883
+1653045758537	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
