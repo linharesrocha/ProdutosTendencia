@@ -4,6 +4,7 @@ from selenium.webdriver.firefox.options import Options
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
 import pandas as pd
+from datetime import datetime
 from time import sleep
 
 
@@ -36,7 +37,13 @@ carrousel_grow = site.find(class_="ui-search-carousel")
 product_list = carrousel_grow.findAll('div', class_='entry-column')
 
 # Buscando produtos e salvando em uma lista
+product_position_grow = [p.find('div', class_ = 'ui-search-entry-description').getText().replace('º MAIOR CRESCIMENTO', '') for p in product_list]
 product_name_grow = [p.find('p', class_ = 'ui-search-entry-keyword').getText() for p in product_list]
-product_position_grow = [p.find('div', class_ = 'ui-search-entry-description').getText() for p in product_list]
 product_link_grow = [p.find('a', href=True).get('href').replace('#trend', '') for p in product_list]
-print(product_link_grow)
+
+# DataFrame
+data_grow = pd.DataFrame([product_position_grow, product_name_grow, product_link_grow]).T
+data_grow.columns = ['Posicao', 'Nome', 'Link']
+data_grow['scrapy_datetime'] = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+
+data_grow.to_excel('/home/gui/workspace/Tendencias/data_grow.xlsx', index=False, encoding='utf-8')
