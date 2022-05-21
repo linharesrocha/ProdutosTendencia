@@ -19,63 +19,62 @@ navegador.maximize_window()
 
 def pagina_gategoria_tendencia():
 
-    global data_grow
+    global data
+    data = pd.DataFrame()
+    data['Posicao'] = 'NA'
+    data['Nome'] = 'NA'
+    data['Link'] = 'NA'
+
 
     url = "https://tendencias.mercadolivre.com.br/1276-esportes_e_fitness"
-
     # Iniciando Navegador
     navegador.get(url)
-
     # Descendo a pagina para carregar todos os produtos
     body = navegador.find_element(By.CSS_SELECTOR, "body")
-
     for i in range(1, 20):
         body.send_keys(Keys.PAGE_DOWN)
-
     try:
         element_present = EC.presence_of_element_located((By.CLASS_NAME, 'ui-search-entry-keyword'))
         WebDriverWait(navegador, 10).until(element_present)
     except TimeoutException:
         print("Timed out waiting for page to load")
-
     page_content = navegador.page_source
     site = BeautifulSoup(page_content, 'html.parser')
 
-    # Carrousel -> As buscas que mais cresceram
-    carrousel_grow = site.find(class_="ui-search-carousel")
+    page_trends = site.findAll(class_="ui-search-carousel")
 
-    # Pegando produtos -> As buscas que mais cresceram
-    product_list = carrousel_grow.findAll('div', class_='entry-column')
+    aux = 0
+    for x in range(len(page_trends)):
+        # Pegando produtos
+        category_trends = page_trends[x].findAll('div', class_='entry-column')
 
-    # Buscando produtos e salvando em uma lista
-    product_position_grow = [p.find('div', class_ = 'ui-search-entry-description').getText().replace('º MAIOR CRESCIMENTO', '') for p in product_list]
-    product_name_grow = [p.find('h3', class_ = 'ui-search-entry-keyword').getText() for p in product_list]
-    product_link_grow = [p.find('a', href=True).get('href').replace('#trend', '') for p in product_list]
+        # Buscando produtos
+        for product in category_trends:
+            data.loc[aux, 'Posicao'] = product.find('div', class_='ui-search-entry-description').getText()
+            data.loc[aux, 'Nome'] = product.find('h3', class_='ui-search-entry-keyword').getText()
+            data.loc[aux, 'Link'] = product.find('a', href=True).get('href').replace('#trend', '')
+            aux += 1
 
-    # DataFrame
-    data_grow = pd.DataFrame([product_position_grow, product_name_grow, product_link_grow]).T
-    data_grow.columns = ['Posicao', 'Nome', 'Link']
-    data_grow['scrapy_datetime'] = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-    data_grow['Qnt-Normal'] = 0
-    data_grow['Qnt-FULL'] = 0
-    data_grow['Media-Preco'] = 0
-    data_grow['Mediana-Preco'] = 0
-    data_grow['Media-Vendas'] = 0
-    data_grow['Mediana-Vendas'] = 0
-    data_grow['GoogleTrends'] = 'NA'
+    data['Qnt-Normal'] = 0
+    data['Qnt-FULL'] = 0
+    data['Media-Preco'] = 0
+    data['Mediana-Preco'] = 0
+    data['Media-Vendas'] = 0
+    data['Mediana-Vendas'] = 0
+    data['GoogleTrends'] = 'NA'
+    data['scrapy_datetime'] = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
 
+    data.to_excel("produtos.xlsx", index=False, encoding='utf-8')
 
-    return data_grow
+    return data
 
-
-
-def pagina_pesquisa_produto(data_grow):
+def pagina_pesquisa_produto(data):
 
     # ACESSA CADA PRODUTO TENDENDIA, -> 1PRIMEIRO PRODUTO TENDENCIA, 2PRODUTO TENDENCIAS E
     # ACESSA TODOS ELES UM DE CADA VEZ
-    #for z in range(len(data_grow)):
+    #for z in range(len(data)):
     for z in range(2):
-        url = data_grow.loc[z, "Link"]
+        url = data.loc[z, "Link"]
         print(url)
 
         navegador.get(url)
@@ -168,20 +167,20 @@ def pagina_pesquisa_produto(data_grow):
         products_sales_median = round(statistics.median(products_sales_list),2)
         products_price_median = round(statistics.median(products_price_list),2)
 
-        data_grow.loc[z, 'Qnt-Normal'] = product_normal_quantity
-        data_grow.loc[z, 'Qnt-FULL'] = product_full_quantity
-        data_grow.loc[z, 'Media-Preco'] = products_price_mean
-        data_grow.loc[z, 'Mediana-Preco'] = products_price_median
-        data_grow.loc[z, 'Media-Vendas'] = products_sales_mean
-        data_grow.loc[z, 'Mediana-Vendas'] = products_sales_median
+        data.loc[z, 'Qnt-Normal'] = product_normal_quantity
+        data.loc[z, 'Qnt-FULL'] = product_full_quantity
+        data.loc[z, 'Media-Preco'] = products_price_mean
+        data.loc[z, 'Mediana-Preco'] = products_price_median
+        data.loc[z, 'Media-Vendas'] = products_sales_mean
+        data.loc[z, 'Mediana-Vendas'] = products_sales_median
 
         url_gtrends = "https://trends.google.com.br/trends/explore?geo=BR&q="
-        name_product = data_grow.loc[z, 'Nome']
-        data_grow.loc[z, 'GoogleTrends'] = url_gtrends + name_product
+        name_product = data.loc[z, 'Nome']
+        data.loc[z, 'GoogleTrends'] = url_gtrends + name_product
 
-        data_grow.to_excel("produtos.xlsx", index=False, encoding='utf-8')
+        data.to_excel("produtos.xlsx", index=False, encoding='utf-8')
 
 
 if __name__ == "__main__":
     pagina_gategoria_tendencia()
-    pagina_pesquisa_produto(data_grow)
+    #pagina_pesquisa_produto(data)
