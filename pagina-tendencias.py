@@ -11,9 +11,17 @@ from datetime import datetime
 import statistics
 import re
 
+# Functions
+def waituntil(driver, class_):
+    try:
+        element_present = EC.presence_of_element_located((By.CLASS_NAME, class_))
+        WebDriverWait(driver, 10).until(element_present)
+    except TimeoutException:
+        print("Timed out waiting for page to load")
+
 # Configurações
 option = Options()
-option.headless = True
+option.headless = False
 navegador = webdriver.Firefox(options=option)
 navegador.maximize_window()
 
@@ -33,11 +41,8 @@ def pagina_gategoria_tendencia():
     body = navegador.find_element(By.CSS_SELECTOR, "body")
     for i in range(1, 20):
         body.send_keys(Keys.PAGE_DOWN)
-    try:
-        element_present = EC.presence_of_element_located((By.CLASS_NAME, 'ui-search-entry-keyword'))
-        WebDriverWait(navegador, 10).until(element_present)
-    except TimeoutException:
-        print("Timed out waiting for page to load")
+
+    waituntil(navegador, 'ui-search-entry-keyword')
     page_content = navegador.page_source
     site = BeautifulSoup(page_content, 'html.parser')
 
@@ -47,8 +52,6 @@ def pagina_gategoria_tendencia():
     for x in range(len(page_trends)):
         # Pegando produtos
         category_trends = page_trends[x].findAll('div', class_='entry-column')
-
-        # Buscando produtos
         for product in category_trends:
             data.loc[aux, 'Posicao'] = product.find('div', class_='ui-search-entry-description').getText()
             data.loc[aux, 'Nome'] = product.find('h3', class_='ui-search-entry-keyword').getText()
@@ -64,32 +67,22 @@ def pagina_gategoria_tendencia():
     data['GoogleTrends'] = 'NA'
     data['scrapy_datetime'] = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
 
-    data.to_excel("produtos.xlsx", index=False, encoding='utf-8')
-
     return data
 
-def pagina_pesquisa_produto(data):
+    navegador.quit()
 
+def pagina_pesquisa_produto(data):
     # ACESSA CADA PRODUTO TENDENDIA, -> 1PRIMEIRO PRODUTO TENDENCIA, 2PRODUTO TENDENCIAS E
     # ACESSA TODOS ELES UM DE CADA VEZ
     #for z in range(len(data)):
-    for z in range(2):
+    for z in range(12):
+        #print("{} / {}".format(z, len(data)))
+
         url = data.loc[z, "Link"]
         print(url)
-
         navegador.get(url)
 
-        body = navegador.find_element(By.CSS_SELECTOR, "body")
-
-        for i in range(1, 20):
-            body.send_keys(Keys.PAGE_DOWN)
-
-        try:
-            element_present = EC.presence_of_element_located((By.CLASS_NAME, 'ui-search-search-result__quantity-results'))
-            WebDriverWait(navegador, 10).until(element_present)
-        except TimeoutException:
-            print("Timed out waiting for page to load")
-
+        waituntil(navegador, 'ui-search-search-result__quantity-results')
         page_content = navegador.page_source
         site = BeautifulSoup(page_content, 'html.parser')
 
@@ -100,33 +93,33 @@ def pagina_pesquisa_produto(data):
             navegador.get(url + "_Frete_Full")
             page_content = navegador.page_source
             site = BeautifulSoup(page_content, 'html.parser')
-
             # Quantidade de anúncios FULL
             product_full_quantity = site.find('span', class_="ui-search-search-result__quantity-results").getText()
-
             navegador.get(url)
+
         except AttributeError:
             product_full_quantity = 'NaoTem'
-
             navegador.get(url)
-
             page_content = navegador.page_source
             site = BeautifulSoup(page_content, 'html.parser')
 
 
-        # TODOS OS PRODUTOS
+        page_content = navegador.page_source
+        site = BeautifulSoup(page_content, 'html.parser')
+        waituntil(navegador, 'ui-search-result__bookmark')
+
+        # TODOS OS PRODUTOS DA CATEGORIA ATUAL
         container = site.find(class_='ui-search-results')
         product_container = container.findAll('li', class_='ui-search-layout__item')
         product_link = [p.find('a', href=True).get('href') for p in product_container]
-
+        print(product_link)
         products_price = []
         products_sales = []
 
-        # ACESSA CADA PRODUTO DENTRO DE ALGUMA CATEGORIA/TENDENCIA
+        # ACESSA CADA PRODUTO DENTRO DA ATUAL CATEGORIA/TENDENCIA
         # TIRAR MEDIA DE QUANTIDADE DE VENDAS, PRECO
-
-        products_length = len(product_link)
-        products_length = round(products_length / 3)
+        #products_length = len(product_link)
+        #products_length = round(products_length / 3)
         #for i in range(products_length):
         for i in range(3):
             navegador.get(product_link[i])
@@ -137,12 +130,12 @@ def pagina_pesquisa_produto(data):
 
             # Caso o preço não esteja na lateral
             try:
-                price_fraction = product_side_info.find('span', class_='andes-money-amount__fraction').getText()
+                price_fraction = product_side_info.find('span', class_='andes-money-amount__fraction').getText().replace('.', '')
                 products_price.append(price_fraction)
             except AttributeError:
-                price_fraction = site.find('span', class_='andes-money-amount__fraction').getText()
+                price_fraction = site.find('span', class_='andes-money-amount__fraction').getText().replace('.', '')
                 products_price.append(price_fraction)
-
+            print(price_fraction)
             # Caso o número de venda não esteja na lateral
             try:
                 sales = product_side_info.find('span', class_='ui-pdp-subtitle').getText()
@@ -183,4 +176,4 @@ def pagina_pesquisa_produto(data):
 
 if __name__ == "__main__":
     pagina_gategoria_tendencia()
-    #pagina_pesquisa_produto(data)
+    pagina_pesquisa_produto(data)
