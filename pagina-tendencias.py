@@ -6,13 +6,16 @@ from selenium.webdriver.common.by import By
 from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from sql import start_sqlite
 import pandas as pd
 from datetime import datetime
 import statistics
 import re
 
-
 # Functions
+
+
+
 def waituntil(driver, class_):
     try:
         element_present = EC.presence_of_element_located((By.CLASS_NAME, class_))
@@ -189,3 +192,4 @@ if __name__ == "__main__":
     pagina_tendencias()
     pagina_produtos(data)
     transformacao(data)
+    start_sqlite()
