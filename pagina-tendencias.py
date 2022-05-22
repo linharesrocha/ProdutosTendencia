@@ -27,7 +27,7 @@ def waituntil(driver, class_):
 
 # Configurações
 option = Options()
-option.headless = False
+option.headless = True
 navegador = webdriver.Firefox(options=option)
 navegador.maximize_window()
 
@@ -81,7 +81,7 @@ def pagina_produtos(data):
     # ACESSA CADA PRODUTO TENDENDIA, -> 1PRIMEIRO PRODUTO TENDENCIA, 2PRODUTO TENDENCIAS E
     # ACESSA TODOS ELES UM DE CADA VEZ
     # for z in range(len(data)):
-    for z in range(12):
+    for z in range(2):
         print("{} / {}".format(z, len(data)))
 
         url = data.loc[z, "Link"]
@@ -92,13 +92,13 @@ def pagina_produtos(data):
         site = BeautifulSoup(page_content, 'html.parser')
 
         # Qntd anúncios normal
-        product_normal_quantity = site.find('span', class_="ui-search-search-result__quantity-results").getText()
+        product_normal_quantity = float(site.find('span', class_="ui-search-search-result__quantity-results").getText().replace(' resultado', ''))
 
         try:
             navegador.get(url + "_Frete_Full")
             page_content = navegador.page_source
             site = BeautifulSoup(page_content, 'html.parser')
-            product_full_quantity = site.find('span', class_="ui-search-search-result__quantity-results").getText()
+            product_full_quantity = float(site.find('span', class_="ui-search-search-result__quantity-results").getText().replace(' resultado', ''))
         except AttributeError:
             product_full_quantity = 'NaoTem'
 
@@ -175,6 +175,8 @@ def salvar(data):
     data_crescimento.to_csv("produtos_crescimento.csv", index=False, encoding='utf-8')
     data_desejada.to_csv("produtos_desejado.csv", index=False, encoding='utf-8')
     data_popular.to_csv("produtos_popular.csv", index=False, encoding='utf-8')
+
+    print(data.dtypes)
 
 
 if __name__ == "__main__":

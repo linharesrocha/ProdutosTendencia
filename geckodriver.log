@@ -2668,3 +2668,38 @@ JavaScript error: https://http2.mlstatic.com/frontend-assets/vpp-frontend/common
 JavaScript error: resource://devtools/client/jsonview/Sniffer.jsm, line 56: NS_ERROR_NOT_AVAILABLE: Component returned failure code: 0x80040111 (NS_ERROR_NOT_AVAILABLE) [nsIChannel.contentType]
 1653235875369	Marionette	WARN	Ignoring event 'DOMContentLoaded' because document has an invalid readyState of 'complete'.
 JavaScript error: https://http2.mlstatic.com/frontend-assets/search-nordic/188.cefdf02d.js, line 2: Error: Request aborted
+1653236589211	geckodriver	INFO	Listening on 127.0.0.1:37985
+1653236589714	mozrunner::runner	INFO	Running command: "/usr/local/bin/firefox" "--marionette" "--remote-debugging-port" "34955" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "/tmp/rust_mozprofileXmpRRd"
+ATTENTION: default value of option mesa_glthread overridden by environment.
+ATTENTION: default value of option mesa_glthread overridden by environment.
+1653236590543	Marionette	INFO	Marionette enabled
+ATTENTION: default value of option mesa_glthread overridden by environment.
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at /tmp/rust_mozprofileXmpRRd/search.json.mozlz4", (void 0)))
+DevTools listening on ws://localhost:34955/devtools/browser/ef86d76e-dba7-40c1-9a5c-7c2001254abc
+1653236593089	Marionette	INFO	Listening on port 36385
+Read port: 36385
+1653236593142	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+JavaScript error: https://http2.mlstatic.com/frontend-assets/search-nordic/188.cefdf02d.js, line 2: Error: Request aborted
+1653236655726	geckodriver	INFO	Listening on 127.0.0.1:44909
+1653236655733	mozrunner::runner	INFO	Running command: "/usr/local/bin/firefox" "--marionette" "--remote-debugging-port" "44079" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "/tmp/rust_mozprofileMhDPL0"
+1653236662988	geckodriver	INFO	Listening on 127.0.0.1:33311
+1653236662995	mozrunner::runner	INFO	Running command: "/usr/local/bin/firefox" "--marionette" "-headless" "--remote-debugging-port" "58659" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "/tmp/rust_mozprofileJotZO7"
+*** You are running in headless mode.
+1653236663398	Marionette	INFO	Marionette enabled
+[GFX1-]: RenderCompositorSWGL failed mapping default framebuffer, no dt
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at /tmp/rust_mozprofileJotZO7/search.json.mozlz4", (void 0)))
+DevTools listening on ws://localhost:58659/devtools/browser/4acb3211-b71c-4d7b-b023-f03a9ee4a7da
+1653236664861	Marionette	INFO	Listening on port 41175
+Read port: 41175
+1653236664923	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+1653236721218	Marionette	INFO	Stopped listening on port 43545
+console.warn: TopSitesFeed: Failed to fetch data from Contile server: NetworkError when attempting to fetch resource.
+
+###!!! [Parent][PImageBridgeParent] Error: RunMessage(msgname=PImageBridge::Msg_WillClose) Channel closing: too late to send/recv, messages will be lost
+
+Sandbox: Unexpected EOF, op 0 flags 00 path /proc/cpuinfo
+1653236722501	Marionette	INFO	Stopped listening on port 36385
+console.warn: TopSitesFeed: Failed to fetch data from Contile server: NetworkError when attempting to fetch resource.
+
+###!!! [Parent][PImageBridgeParent] Error: RunMessage(msgname=PImageBridge::Msg_WillClose) Channel closing: too late to send/recv, messages will be lost
+
