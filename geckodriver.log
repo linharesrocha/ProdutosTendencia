@@ -2495,3 +2495,38 @@ console.warn: TopSitesFeed: Failed to fetch data from Contile server: NetworkErr
 ###!!! [Parent][PImageBridgeParent] Error: RunMessage(msgname=PImageBridge::Msg_WillClose) Channel closing: too late to send/recv, messages will be lost
 
 Sandbox: Unexpected EOF, op 0 flags 00 path /proc/cpuinfo
+1653231619825	geckodriver	INFO	Listening on 127.0.0.1:47597
+1653231620328	mozrunner::runner	INFO	Running command: "/usr/local/bin/firefox" "--marionette" "-headless" "--remote-debugging-port" "41329" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "/tmp/rust_mozprofilepN2pJz"
+*** You are running in headless mode.
+1653231620954	Marionette	INFO	Marionette enabled
+[GFX1-]: RenderCompositorSWGL failed mapping default framebuffer, no dt
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at /tmp/rust_mozprofilepN2pJz/search.json.mozlz4", (void 0)))
+DevTools listening on ws://localhost:41329/devtools/browser/6edce6e6-7cc3-40c1-99d5-5773c4da34bd
+1653231622531	Marionette	INFO	Listening on port 39341
+Read port: 39341
+1653231622649	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+JavaScript error: resource://devtools/client/jsonview/Sniffer.jsm, line 56: NS_ERROR_NOT_AVAILABLE: Component returned failure code: 0x80040111 (NS_ERROR_NOT_AVAILABLE) [nsIChannel.contentType]
+JavaScript error: https://http2.mlstatic.com/frontend-assets/vpp-frontend/commons.68e693f0.js, line 2: Error: Request aborted
+JavaScript error: https://http2.mlstatic.com/frontend-assets/vpp-frontend/commons.68e693f0.js, line 2: Error: Request aborted
+JavaScript error: https://http2.mlstatic.com/frontend-assets/search-nordic/188.cefdf02d.js, line 2: Error: Request aborted
+JavaScript error: https://http2.mlstatic.com/frontend-assets/search-nordic/188.cefdf02d.js, line 2: Error: Request aborted
+JavaScript error: https://http2.mlstatic.com/frontend-assets/search-nordic/188.cefdf02d.js, line 2: Error: Request aborted
+Exiting due to channel error.
+Exiting due to channel error.
+Exiting due to channel error.
+1653232045641	geckodriver	INFO	Listening on 127.0.0.1:57533
+1653232045648	mozrunner::runner	INFO	Running command: "/usr/local/bin/firefox" "--marionette" "-headless" "--remote-debugging-port" "33749" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "/tmp/rust_mozprofilegngVCY"
+*** You are running in headless mode.
+1653232046058	Marionette	INFO	Marionette enabled
+[GFX1-]: RenderCompositorSWGL failed mapping default framebuffer, no dt
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at /tmp/rust_mozprofilegngVCY/search.json.mozlz4", (void 0)))
+DevTools listening on ws://localhost:33749/devtools/browser/9bc78383-eeef-47e6-bbea-921a9c2a7ee6
+1653232048100	Marionette	INFO	Listening on port 38539
+Read port: 38539
+1653232048188	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+JavaScript error: resource://devtools/client/jsonview/Sniffer.jsm, line 56: NS_ERROR_NOT_AVAILABLE: Component returned failure code: 0x80040111 (NS_ERROR_NOT_AVAILABLE) [nsIChannel.contentType]
+JavaScript error: https://http2.mlstatic.com/frontend-assets/vpp-frontend/commons.68e693f0.js, line 2: Error: Request aborted
+JavaScript error: https://http2.mlstatic.com/frontend-assets/search-nordic/188.cefdf02d.js, line 2: Error: Request aborted
+JavaScript error: https://http2.mlstatic.com/frontend-assets/search-nordic/188.cefdf02d.js, line 2: Error: Request aborted
+JavaScript error: resource://gre/actors/ContentMetaChild.jsm, line 179: InvalidStateError: JSWindowActorChild.sendAsyncMessage: JSWindowActorChild cannot send at the moment
+JavaScript error: https://http2.mlstatic.com/frontend-assets/search-nordic/188.cefdf02d.js, line 2: Error: Request aborted

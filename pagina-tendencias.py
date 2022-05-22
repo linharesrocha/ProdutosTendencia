@@ -23,7 +23,7 @@ def waituntil(driver, class_):
 
 # Configurações
 option = Options()
-option.headless = False
+option.headless = True
 navegador = webdriver.Firefox(options=option)
 navegador.maximize_window()
 
@@ -81,7 +81,6 @@ def pagina_pesquisa_produto(data):
         # print("{} / {}".format(z, len(data)))
 
         url = data.loc[z, "Link"]
-        print(url)
         navegador.get(url)
 
         waituntil(navegador, 'ui-search-search-result__quantity-results')
@@ -133,14 +132,15 @@ def pagina_pesquisa_produto(data):
             else:
                 products_sales.append('0')
 
+        # MANIPULANDO DADOS
         products_price = list(map(int, products_price))
         products_sales = list(map(int, products_sales))
-
         products_sales_mean = round(statistics.mean(products_sales), 2)
         products_price_mean = round(statistics.mean(products_price), 2)
         products_sales_median = round(statistics.median(products_sales), 2)
         products_price_median = round(statistics.median(products_price), 2)
 
+        # CRIANDO NOVAS COLUNAS
         data.loc[z, 'Qnt-Normal'] = product_normal_quantity
         data.loc[z, 'Qnt-FULL'] = product_full_quantity
         data.loc[z, 'Media-Preco'] = products_price_mean
@@ -152,7 +152,15 @@ def pagina_pesquisa_produto(data):
         name_product = data.loc[z, 'Nome']
         data.loc[z, 'GoogleTrends'] = url_gtrends + name_product
 
-        data.to_excel("produtos.xlsx", index=False, encoding='utf-8')
+    # CRIANDO 3 DATAFRAMES DIFERENTES
+    data_crescimento = data.loc[data['Posicao'].str.contains('CRESCIMENTO')]
+    data_desejada = data.loc[data['Posicao'].str.contains('DESEJADA')]
+    data_popular = data.loc[data['Posicao'].str.contains('POPULAR')]
+
+    # SALVANDO EXCEL
+    data_crescimento.to_excel("produtos_crescimento.xlsx", index=False, encoding='utf-8')
+    data_desejada.to_excel("produtos_desejado.xlsx", index=False, encoding='utf-8')
+    data_popular.to_excel("produtos_popular.xlsx", index=False, encoding='utf-8')
 
 
 if __name__ == "__main__":
