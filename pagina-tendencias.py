@@ -18,12 +18,16 @@ def waituntil(driver, class_):
         element_present = EC.presence_of_element_located((By.CLASS_NAME, class_))
         WebDriverWait(driver, 10).until(element_present)
     except TimeoutException:
-        print("Timed out waiting for page to load")
+        print('Timed out waiting for page to load')
+        print('Trying again')
+        driver.refresh()
+        element_present = EC.presence_of_element_located((By.CLASS_NAME, class_))
+        WebDriverWait(driver, 10).until(element_present)
 
 
 # Configurações
 option = Options()
-option.headless = True
+option.headless = False
 navegador = webdriver.Firefox(options=option)
 navegador.maximize_window()
 
@@ -72,12 +76,13 @@ def pagina_tendencias():
 
     navegador.quit()
 
+
 def pagina_produtos(data):
     # ACESSA CADA PRODUTO TENDENDIA, -> 1PRIMEIRO PRODUTO TENDENCIA, 2PRODUTO TENDENCIAS E
     # ACESSA TODOS ELES UM DE CADA VEZ
     # for z in range(len(data)):
     for z in range(12):
-        # print("{} / {}".format(z, len(data)))
+        print("{} / {}".format(z, len(data)))
 
         url = data.loc[z, "Link"]
         navegador.get(url)
@@ -124,7 +129,7 @@ def pagina_produtos(data):
             products_price.append(price_fraction)
 
             sales = product.find('span', class_='ui-pdp-subtitle').getText()
-            if sales != 'Novo': # Diferente de 0 Vendas
+            if sales != 'Novo':  # Diferente de 0 Vendas
                 products_sales_clean = re.findall('[0-9]+', sales)
                 products_sales_clean = ''.join(map(str, products_sales_clean))
                 products_sales.append(products_sales_clean)
@@ -151,19 +156,25 @@ def pagina_produtos(data):
         name_product = data.loc[z, 'Nome']
         data.loc[z, 'GoogleTrends'] = url_gtrends + name_product
 
-        return data
-        navegador.quit()
+    return data
+    navegador.quit()
+
 
 def salvar(data):
+    # REORDENANDO COLUNAS
+    data = data[['Posicao', 'Nome', 'Qnt-Normal', 'Qnt-FULL',
+                       'Media-Preco', 'Mediana-Preco', 'Media-Vendas', 'Mediana-Vendas',
+                       'Link', 'GoogleTrends', 'scrapy_datetime']]
+
     # CRIANDO 3 DATAFRAMES DIFERENTES
     data_crescimento = data.loc[data['Posicao'].str.contains('CRESCIMENTO')]
     data_desejada = data.loc[data['Posicao'].str.contains('DESEJADA')]
     data_popular = data.loc[data['Posicao'].str.contains('POPULAR')]
 
     # SALVANDO EXCEL
-    data_crescimento.to_excel("produtos_crescimento.xlsx", index=False, encoding='utf-8')
-    data_desejada.to_excel("produtos_desejado.xlsx", index=False, encoding='utf-8')
-    data_popular.to_excel("produtos_popular.xlsx", index=False, encoding='utf-8')
+    data_crescimento.to_csv("produtos_crescimento.csv", index=False, encoding='utf-8')
+    data_desejada.to_csv("produtos_desejado.csv", index=False, encoding='utf-8')
+    data_popular.to_csv("produtos_popular.csv", index=False, encoding='utf-8')
 
 
 if __name__ == "__main__":
