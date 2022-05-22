@@ -4,13 +4,13 @@ from sqlalchemy import create_engine
 
 
 def start_sqlite():
-    db = create_engine('sqlite:///db_tendencias_ml.sqlite', echo=False)
+    db = create_engine('sqlite:///SQL/db_tendencias_ml.sqlite', echo=False)
     conn = db.connect()
 
     # dataset
-    df_crescimento = pd.read_csv('produtos_crescimento.csv')
-    df_desejado = pd.read_csv('produtos_desejado.csv')
-    df_popular = pd.read_csv('produtos_popular.csv')
+    df_crescimento = pd.read_csv('CSV/produtos_crescimento.csv')
+    df_desejado = pd.read_csv('CSV/produtos_desejado.csv')
+    df_popular = pd.read_csv('CSV/produtos_popular.csv')
 
     schema_crescimento = """
     CREATE TABLE crescimento(
@@ -65,7 +65,8 @@ def start_sqlite():
         conn.execute(schema_desejado)
         conn.execute(schema_popular)
     except:
-        print('Schemas já criadas')
+        print('Schema ja criado')
+
 
     # Insert data into table
     df_crescimento.to_sql('crescimento', con=conn, if_exists='replace', index=False)

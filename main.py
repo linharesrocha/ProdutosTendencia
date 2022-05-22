@@ -6,7 +6,8 @@ from selenium.webdriver.common.by import By
 from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-from sql import start_sqlite
+from selenium.webdriver.firefox.service import Service
+from SQL.sql import start_sqlite
 import pandas as pd
 from datetime import datetime
 import statistics
@@ -36,9 +37,13 @@ navegador = webdriver.Firefox(options=option)
 pd.set_option('mode.chained_assignment', None)
 navegador.maximize_window()
 
-#Logging
+#Mkdir
 if not os.path.exists('Logs'):
     os.makedirs('Logs')
+if not os.path.exists('CSV'):
+    os.makedirs('CSV')
+
+
 logging.basicConfig(filename='Logs/tendencias_ml.txt',
                     format='%(asctime)s - %(levelname)s - %(name)s - %(message)s',
                     datefmt='%Y-%m-%d %H:%M:%S',
@@ -207,9 +212,9 @@ def transformacao(data):
 
     logger.info('Salvando CSV')
     # SALVANDO EXCEL
-    data_crescimento.to_csv("produtos_crescimento.csv", index=False, encoding='utf-8')
-    data_desejada.to_csv("produtos_desejado.csv", index=False, encoding='utf-8')
-    data_popular.to_csv("produtos_popular.csv", index=False, encoding='utf-8')
+    data_crescimento.to_csv("CSV/produtos_crescimento.csv", index=False, encoding='utf-8')
+    data_desejada.to_csv("CSV/produtos_desejado.csv", index=False, encoding='utf-8')
+    data_popular.to_csv("CSV/produtos_popular.csv", index=False, encoding='utf-8')
 
 if __name__ == "__main__":
     pagina_tendencias()
