@@ -92,15 +92,18 @@ def pagina_produtos(data):
         site = BeautifulSoup(page_content, 'html.parser')
 
         # Qntd anúncios normal
-        product_normal_quantity = float(site.find('span', class_="ui-search-search-result__quantity-results").getText().replace(' resultado', ''))
+        product_normal_quantity = site.find('span', class_="ui-search-search-result__quantity-results").getText()
+        product_normal_quantity = int(re.search(r'\d+', product_normal_quantity).group())
 
         try:
             navegador.get(url + "_Frete_Full")
             page_content = navegador.page_source
             site = BeautifulSoup(page_content, 'html.parser')
-            product_full_quantity = float(site.find('span', class_="ui-search-search-result__quantity-results").getText().replace(' resultado', ''))
+            product_full_quantity = site.find('span', class_="ui-search-search-result__quantity-results").getText()
+            product_full_quantity = int(re.search(r'\d+', product_full_quantity).group())
+
         except AttributeError:
-            product_full_quantity = 'NaoTem'
+            product_full_quantity = 0
 
         navegador.get(url)
         page_content = navegador.page_source
@@ -139,9 +142,9 @@ def pagina_produtos(data):
         # MANIPULANDO DADOS
         products_price = list(map(int, products_price))
         products_sales = list(map(int, products_sales))
-        products_sales_mean = round(statistics.mean(products_sales), 2)
+        products_sales_mean = int(statistics.mean(products_sales))
+        products_sales_median = int(statistics.median(products_sales))
         products_price_mean = round(statistics.mean(products_price), 2)
-        products_sales_median = round(statistics.median(products_sales), 2)
         products_price_median = round(statistics.median(products_price), 2)
 
         # CRIANDO NOVAS COLUNAS
@@ -175,9 +178,6 @@ def salvar(data):
     data_crescimento.to_csv("produtos_crescimento.csv", index=False, encoding='utf-8')
     data_desejada.to_csv("produtos_desejado.csv", index=False, encoding='utf-8')
     data_popular.to_csv("produtos_popular.csv", index=False, encoding='utf-8')
-
-    print(data.dtypes)
-
 
 if __name__ == "__main__":
     pagina_tendencias()
