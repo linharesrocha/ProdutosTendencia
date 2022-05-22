@@ -2489,3 +2489,9 @@ JavaScript error: https://http2.mlstatic.com/frontend-assets/vpp-frontend/common
 1653133615499	Marionette	WARN	Ignoring event 'DOMContentLoaded' because document has an invalid readyState of 'complete'.
 JavaScript error: https://http2.mlstatic.com/frontend-assets/search-nordic/188.cefdf02d.js, line 2: Error: Request aborted
 1653133632868	Marionette	WARN	Ignoring event 'DOMContentLoaded' because document has an invalid readyState of 'complete'.
+1653133831855	Marionette	INFO	Stopped listening on port 39693
+console.warn: TopSitesFeed: Failed to fetch data from Contile server: NetworkError when attempting to fetch resource.
+
+###!!! [Parent][PImageBridgeParent] Error: RunMessage(msgname=PImageBridge::Msg_WillClose) Channel closing: too late to send/recv, messages will be lost
+
+Sandbox: Unexpected EOF, op 0 flags 00 path /proc/cpuinfo

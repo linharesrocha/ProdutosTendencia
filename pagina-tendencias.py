@@ -11,6 +11,7 @@ from datetime import datetime
 import statistics
 import re
 
+
 # Functions
 def waituntil(driver, class_):
     try:
@@ -19,20 +20,20 @@ def waituntil(driver, class_):
     except TimeoutException:
         print("Timed out waiting for page to load")
 
+
 # Configurações
 option = Options()
 option.headless = False
 navegador = webdriver.Firefox(options=option)
 navegador.maximize_window()
 
-def pagina_gategoria_tendencia():
 
+def pagina_gategoria_tendencia():
     global data
     data = pd.DataFrame()
     data['Posicao'] = 'NA'
     data['Nome'] = 'NA'
     data['Link'] = 'NA'
-
 
     url = "https://tendencias.mercadolivre.com.br/1276-esportes_e_fitness"
     # Iniciando Navegador
@@ -71,12 +72,13 @@ def pagina_gategoria_tendencia():
 
     navegador.quit()
 
+
 def pagina_pesquisa_produto(data):
     # ACESSA CADA PRODUTO TENDENDIA, -> 1PRIMEIRO PRODUTO TENDENCIA, 2PRODUTO TENDENCIAS E
     # ACESSA TODOS ELES UM DE CADA VEZ
-    #for z in range(len(data)):
+    # for z in range(len(data)):
     for z in range(12):
-        #print("{} / {}".format(z, len(data)))
+        # print("{} / {}".format(z, len(data)))
 
         url = data.loc[z, "Link"]
         print(url)
@@ -93,17 +95,11 @@ def pagina_pesquisa_produto(data):
             navegador.get(url + "_Frete_Full")
             page_content = navegador.page_source
             site = BeautifulSoup(page_content, 'html.parser')
-            # Quantidade de anúncios FULL
             product_full_quantity = site.find('span', class_="ui-search-search-result__quantity-results").getText()
-            navegador.get(url)
-
         except AttributeError:
             product_full_quantity = 'NaoTem'
-            navegador.get(url)
-            page_content = navegador.page_source
-            site = BeautifulSoup(page_content, 'html.parser')
 
-
+        navegador.get(url)
         page_content = navegador.page_source
         site = BeautifulSoup(page_content, 'html.parser')
         waituntil(navegador, 'ui-search-result__bookmark')
@@ -112,53 +108,38 @@ def pagina_pesquisa_produto(data):
         container = site.find(class_='ui-search-results')
         product_container = container.findAll('li', class_='ui-search-layout__item')
         product_link = [p.find('a', href=True).get('href') for p in product_container]
-        print(product_link)
         products_price = []
         products_sales = []
 
         # ACESSA CADA PRODUTO DENTRO DA ATUAL CATEGORIA/TENDENCIA
         # TIRAR MEDIA DE QUANTIDADE DE VENDAS, PRECO
-        #products_length = len(product_link)
-        #products_length = round(products_length / 3)
-        #for i in range(products_length):
+        # products_length = len(product_link)
+        # products_length = round(products_length / 3)
+        # for i in range(products_length):
         for i in range(3):
             navegador.get(product_link[i])
-
             page_content = navegador.page_source
             site = BeautifulSoup(page_content, 'html.parser')
-            product_side_info = site.find(class_='pl-16')
+            product = site.find(class_='pb-40')
 
-            # Caso o preço não esteja na lateral
-            try:
-                price_fraction = product_side_info.find('span', class_='andes-money-amount__fraction').getText().replace('.', '')
-                products_price.append(price_fraction)
-            except AttributeError:
-                price_fraction = site.find('span', class_='andes-money-amount__fraction').getText().replace('.', '')
-                products_price.append(price_fraction)
-            print(price_fraction)
-            # Caso o número de venda não esteja na lateral
-            try:
-                sales = product_side_info.find('span', class_='ui-pdp-subtitle').getText()
+            price_fraction = product.find('span', class_='andes-money-amount__fraction').getText().replace('.', '')
+            products_price.append(price_fraction)
 
-            except AttributeError:
-                sales = site.find('span', class_='ui-pdp-subtitle').getText()
-
-            # Caso não tenha número de vendas
-            if sales != 'Novo':
+            sales = product.find('span', class_='ui-pdp-subtitle').getText()
+            if sales != 'Novo': # Diferente de 0 Vendas
                 products_sales_clean = re.findall('[0-9]+', sales)
                 products_sales_clean = ''.join(map(str, products_sales_clean))
                 products_sales.append(products_sales_clean)
             else:
                 products_sales.append('0')
 
+        products_price = list(map(int, products_price))
+        products_sales = list(map(int, products_sales))
 
-        products_price_list = list(map(int, products_price))
-        products_sales_list = list(map(int, products_sales))
-
-        products_sales_mean = round(statistics.mean(products_sales_list), 2)
-        products_price_mean = round(statistics.mean(products_price_list),2)
-        products_sales_median = round(statistics.median(products_sales_list),2)
-        products_price_median = round(statistics.median(products_price_list),2)
+        products_sales_mean = round(statistics.mean(products_sales), 2)
+        products_price_mean = round(statistics.mean(products_price), 2)
+        products_sales_median = round(statistics.median(products_sales), 2)
+        products_price_median = round(statistics.median(products_price), 2)
 
         data.loc[z, 'Qnt-Normal'] = product_normal_quantity
         data.loc[z, 'Qnt-FULL'] = product_full_quantity
