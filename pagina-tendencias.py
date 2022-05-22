@@ -29,6 +29,7 @@ def waituntil(driver, class_):
 option = Options()
 option.headless = True
 navegador = webdriver.Firefox(options=option)
+pd.set_option('mode.chained_assignment', None)
 navegador.maximize_window()
 
 
@@ -63,12 +64,12 @@ def pagina_tendencias():
             data.loc[aux, 'Link'] = product.find('a', href=True).get('href').replace('#trend', '')
             aux += 1
 
-    data['Qnt-Normal'] = 0
-    data['Qnt-FULL'] = 0
-    data['Media-Preco'] = 0
-    data['Mediana-Preco'] = 0
-    data['Media-Vendas'] = 0
-    data['Mediana-Vendas'] = 0
+    data['Qnt_Normal'] = 0
+    data['Qnt_FULL'] = 0
+    data['Media_Preco'] = 0
+    data['Mediana_Preco'] = 0
+    data['Media_Vendas'] = 0
+    data['Mediana_Vendas'] = 0
     data['GoogleTrends'] = 'NA'
     data['scrapy_datetime'] = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
 
@@ -144,16 +145,16 @@ def pagina_produtos(data):
         products_sales = list(map(int, products_sales))
         products_sales_mean = int(statistics.mean(products_sales))
         products_sales_median = int(statistics.median(products_sales))
-        products_price_mean = round(statistics.mean(products_price), 2)
+        products_price_mean = round(float(statistics.mean(products_price)), 2)
         products_price_median = round(statistics.median(products_price), 2)
 
         # CRIANDO NOVAS COLUNAS
-        data.loc[z, 'Qnt-Normal'] = product_normal_quantity
-        data.loc[z, 'Qnt-FULL'] = product_full_quantity
-        data.loc[z, 'Media-Preco'] = products_price_mean
-        data.loc[z, 'Mediana-Preco'] = products_price_median
-        data.loc[z, 'Media-Vendas'] = products_sales_mean
-        data.loc[z, 'Mediana-Vendas'] = products_sales_median
+        data.loc[z, 'Qnt_Normal'] = product_normal_quantity
+        data.loc[z, 'Qnt_FULL'] = product_full_quantity
+        data.loc[z, 'Media_Preco'] = products_price_mean
+        data.loc[z, 'Mediana_Preco'] = products_price_median
+        data.loc[z, 'Media_Vendas'] = products_sales_mean
+        data.loc[z, 'Mediana_Vendas'] = products_sales_median
 
         url_gtrends = "https://trends.google.com.br/trends/explore?geo=BR&q="
         name_product = data.loc[z, 'Nome']
@@ -163,16 +164,21 @@ def pagina_produtos(data):
     navegador.quit()
 
 
-def salvar(data):
+def transformacao(data):
     # REORDENANDO COLUNAS
-    data = data[['Posicao', 'Nome', 'Qnt-Normal', 'Qnt-FULL',
-                       'Media-Preco', 'Mediana-Preco', 'Media-Vendas', 'Mediana-Vendas',
+    data = data[['Posicao', 'Nome', 'Qnt_Normal', 'Qnt_FULL',
+                       'Media_Preco', 'Mediana_Preco', 'Media_Vendas', 'Mediana_Vendas',
                        'Link', 'GoogleTrends', 'scrapy_datetime']]
 
     # CRIANDO 3 DATAFRAMES DIFERENTES
     data_crescimento = data.loc[data['Posicao'].str.contains('CRESCIMENTO')]
     data_desejada = data.loc[data['Posicao'].str.contains('DESEJADA')]
     data_popular = data.loc[data['Posicao'].str.contains('POPULAR')]
+
+    # REMOVENDO STRING E CONVERTENDO POSICAO PARA INT
+    data_crescimento['Posicao'] = data_crescimento['Posicao'].str.extract('(\d+)').astype(int)
+    data_desejada['Posicao'] = data_desejada['Posicao'].str.extract('(\d+)').astype(int)
+    data_popular['Posicao'] = data_popular['Posicao'].str.extract('(\d+)').astype(int)
 
     # SALVANDO EXCEL
     data_crescimento.to_csv("produtos_crescimento.csv", index=False, encoding='utf-8')
@@ -182,4 +188,4 @@ def salvar(data):
 if __name__ == "__main__":
     pagina_tendencias()
     pagina_produtos(data)
-    salvar(data)
+    transformacao(data)

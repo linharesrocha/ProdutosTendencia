@@ -1,21 +1,21 @@
-Posicao,Nome,Qnt-Normal,Qnt-FULL,Media-Preco,Mediana-Preco,Media-Vendas,Mediana-Vendas,Link,GoogleTrends,scrapy_datetime
-1º MAIS DESEJADA,balaclava,0,0,0.0,0,0,0,https://lista.mercadolivre.com.br/balaclava,NA,2022-05-22 13:41:24
-2º MAIS DESEJADA,colchonete,0,0,0.0,0,0,0,https://lista.mercadolivre.com.br/colchonete,NA,2022-05-22 13:41:24
-3º MAIS DESEJADA,squeeze,0,0,0.0,0,0,0,https://lista.mercadolivre.com.br/squeeze,NA,2022-05-22 13:41:24
-4º MAIS DESEJADA,garrafa agua,0,0,0.0,0,0,0,https://lista.mercadolivre.com.br/garrafa-agua,NA,2022-05-22 13:41:24
-5º MAIS DESEJADA,blade 98 305gr,0,0,0.0,0,0,0,https://lista.mercadolivre.com.br/blade-98-305gr,NA,2022-05-22 13:41:24
-6º MAIS DESEJADA,sapatilha beach tennis,0,0,0.0,0,0,0,https://lista.mercadolivre.com.br/sapatilha-beach-tennis,NA,2022-05-22 13:41:24
-7º MAIS DESEJADA,casual,0,0,0.0,0,0,0,https://lista.mercadolivre.com.br/casual,NA,2022-05-22 13:41:24
-8º MAIS DESEJADA,academia,0,0,0.0,0,0,0,https://lista.mercadolivre.com.br/academia,NA,2022-05-22 13:41:24
-9º MAIS DESEJADA,colchonete solteiro,0,0,0.0,0,0,0,https://lista.mercadolivre.com.br/colchonete-solteiro,NA,2022-05-22 13:41:24
-10º MAIS DESEJADA,colete salva vidas,0,0,0.0,0,0,0,https://lista.mercadolivre.com.br/colete-salva-vidas,NA,2022-05-22 13:41:24
-11º MAIS DESEJADA,tatame academia,0,0,0.0,0,0,0,https://lista.mercadolivre.com.br/tatame-academia,NA,2022-05-22 13:41:24
-12º MAIS DESEJADA,bomba pcp,0,0,0.0,0,0,0,https://lista.mercadolivre.com.br/bomba-pcp,NA,2022-05-22 13:41:24
-13º MAIS DESEJADA,bermuda ciclismo,0,0,0.0,0,0,0,https://lista.mercadolivre.com.br/bermuda-ciclismo,NA,2022-05-22 13:41:24
-14º MAIS DESEJADA,caneleira,0,0,0.0,0,0,0,https://lista.mercadolivre.com.br/caneleira,NA,2022-05-22 13:41:24
-15º MAIS DESEJADA,kit funcional futebol,0,0,0.0,0,0,0,https://lista.mercadolivre.com.br/kit-funcional-futebol,NA,2022-05-22 13:41:24
-16º MAIS DESEJADA,bola,0,0,0.0,0,0,0,https://lista.mercadolivre.com.br/bola,NA,2022-05-22 13:41:24
-17º MAIS DESEJADA,luneta victoptics,0,0,0.0,0,0,0,https://lista.mercadolivre.com.br/luneta-victoptics,NA,2022-05-22 13:41:24
-18º MAIS DESEJADA,piso borracha academia,0,0,0.0,0,0,0,https://lista.mercadolivre.com.br/piso-borracha-academia,NA,2022-05-22 13:41:24
-19º MAIS DESEJADA,esteira eletrica movement residencial r4 110v,0,0,0.0,0,0,0,https://lista.mercadolivre.com.br/esteira-eletrica-movement-residencial-r4-110v,NA,2022-05-22 13:41:24
-20º MAIS DESEJADA,aisoft bbs,0,0,0.0,0,0,0,https://lista.mercadolivre.com.br/aisoft-bbs,NA,2022-05-22 13:41:24
+Posicao,Nome,Qnt_Normal,Qnt_FULL,Media_Preco,Mediana_Preco,Media_Vendas,Mediana_Vendas,Link,GoogleTrends,scrapy_datetime
+1,balaclava,0,0,0.0,0,0,0,https://lista.mercadolivre.com.br/balaclava,NA,2022-05-22 15:17:40
+2,colchonete,0,0,0.0,0,0,0,https://lista.mercadolivre.com.br/colchonete,NA,2022-05-22 15:17:40
+3,squeeze,0,0,0.0,0,0,0,https://lista.mercadolivre.com.br/squeeze,NA,2022-05-22 15:17:40
+4,garrafa agua,0,0,0.0,0,0,0,https://lista.mercadolivre.com.br/garrafa-agua,NA,2022-05-22 15:17:40
+5,blade 98 305gr,0,0,0.0,0,0,0,https://lista.mercadolivre.com.br/blade-98-305gr,NA,2022-05-22 15:17:40
+6,sapatilha beach tennis,0,0,0.0,0,0,0,https://lista.mercadolivre.com.br/sapatilha-beach-tennis,NA,2022-05-22 15:17:40
+7,casual,0,0,0.0,0,0,0,https://lista.mercadolivre.com.br/casual,NA,2022-05-22 15:17:40
+8,academia,0,0,0.0,0,0,0,https://lista.mercadolivre.com.br/academia,NA,2022-05-22 15:17:40
+9,colchonete solteiro,0,0,0.0,0,0,0,https://lista.mercadolivre.com.br/colchonete-solteiro,NA,2022-05-22 15:17:40
+10,colete salva vidas,0,0,0.0,0,0,0,https://lista.mercadolivre.com.br/colete-salva-vidas,NA,2022-05-22 15:17:40
+11,tatame academia,0,0,0.0,0,0,0,https://lista.mercadolivre.com.br/tatame-academia,NA,2022-05-22 15:17:40
+12,bomba pcp,0,0,0.0,0,0,0,https://lista.mercadolivre.com.br/bomba-pcp,NA,2022-05-22 15:17:40
+13,bermuda ciclismo,0,0,0.0,0,0,0,https://lista.mercadolivre.com.br/bermuda-ciclismo,NA,2022-05-22 15:17:40
+14,caneleira,0,0,0.0,0,0,0,https://lista.mercadolivre.com.br/caneleira,NA,2022-05-22 15:17:40
+15,kit funcional futebol,0,0,0.0,0,0,0,https://lista.mercadolivre.com.br/kit-funcional-futebol,NA,2022-05-22 15:17:40
+16,bola,0,0,0.0,0,0,0,https://lista.mercadolivre.com.br/bola,NA,2022-05-22 15:17:40
+17,luneta victoptics,0,0,0.0,0,0,0,https://lista.mercadolivre.com.br/luneta-victoptics,NA,2022-05-22 15:17:40
+18,piso borracha academia,0,0,0.0,0,0,0,https://lista.mercadolivre.com.br/piso-borracha-academia,NA,2022-05-22 15:17:40
+19,esteira eletrica movement residencial r4 110v,0,0,0.0,0,0,0,https://lista.mercadolivre.com.br/esteira-eletrica-movement-residencial-r4-110v,NA,2022-05-22 15:17:40
+20,aisoft bbs,0,0,0.0,0,0,0,https://lista.mercadolivre.com.br/aisoft-bbs,NA,2022-05-22 15:17:40
