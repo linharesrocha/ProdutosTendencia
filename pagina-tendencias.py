@@ -28,7 +28,7 @@ navegador = webdriver.Firefox(options=option)
 navegador.maximize_window()
 
 
-def pagina_gategoria_tendencia():
+def pagina_tendencias():
     global data
     data = pd.DataFrame()
     data['Posicao'] = 'NA'
@@ -72,8 +72,7 @@ def pagina_gategoria_tendencia():
 
     navegador.quit()
 
-
-def pagina_pesquisa_produto(data):
+def pagina_produtos(data):
     # ACESSA CADA PRODUTO TENDENDIA, -> 1PRIMEIRO PRODUTO TENDENCIA, 2PRODUTO TENDENCIAS E
     # ACESSA TODOS ELES UM DE CADA VEZ
     # for z in range(len(data)):
@@ -152,6 +151,10 @@ def pagina_pesquisa_produto(data):
         name_product = data.loc[z, 'Nome']
         data.loc[z, 'GoogleTrends'] = url_gtrends + name_product
 
+        return data
+        navegador.quit()
+
+def salvar(data):
     # CRIANDO 3 DATAFRAMES DIFERENTES
     data_crescimento = data.loc[data['Posicao'].str.contains('CRESCIMENTO')]
     data_desejada = data.loc[data['Posicao'].str.contains('DESEJADA')]
@@ -164,5 +167,6 @@ def pagina_pesquisa_produto(data):
 
 
 if __name__ == "__main__":
-    pagina_gategoria_tendencia()
-    pagina_pesquisa_produto(data)
+    pagina_tendencias()
+    pagina_produtos(data)
+    salvar(data)
