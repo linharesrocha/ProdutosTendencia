@@ -1,3 +1,4 @@
+# Imports
 from bs4 import BeautifulSoup
 from selenium import webdriver
 from selenium.webdriver.firefox.options import Options
@@ -6,18 +7,17 @@ from selenium.webdriver.common.by import By
 from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-from selenium.webdriver.firefox.service import Service
-from SQL.sql import start_sqlite
+#from SQL.sql import start_sqlite
 import pandas as pd
 from datetime import datetime
 import statistics
 import re
 import logging
 import os
+import streamlit as st
+
 
 # Functions
-
-
 def waituntil(driver, class_):
     try:
         element_present = EC.presence_of_element_located((By.CLASS_NAME, class_))
@@ -28,27 +28,6 @@ def waituntil(driver, class_):
         driver.refresh()
         element_present = EC.presence_of_element_located((By.CLASS_NAME, class_))
         WebDriverWait(driver, 10).until(element_present)
-
-
-# Configurações
-option = Options()
-option.headless = True
-navegador = webdriver.Firefox(options=option)
-pd.set_option('mode.chained_assignment', None)
-navegador.maximize_window()
-
-#Mkdir
-if not os.path.exists('Logs'):
-    os.makedirs('Logs')
-if not os.path.exists('CSV'):
-    os.makedirs('CSV')
-
-
-logging.basicConfig(filename='Logs/tendencias_ml.txt',
-                    format='%(asctime)s - %(levelname)s - %(name)s - %(message)s',
-                    datefmt='%Y-%m-%d %H:%M:%S',
-                    level=logging.INFO)
-logger = logging.getLogger('tendencias_ml')
 
 
 def pagina_tendencias():
@@ -103,7 +82,7 @@ def pagina_produtos(data):
     # ACESSA TODOS ELES UM DE CADA VEZ
     # for z in range(len(data)):
     for z in range(2):
-        #print("{} / {}".format(z, len(data)))
+        # print("{} / {}".format(z, len(data)))
 
         url = data.loc[z, "Link"]
         logger.info('Acessando %s', url)
@@ -193,11 +172,15 @@ def pagina_produtos(data):
 
 
 def transformacao(data):
+    global data_crescimento
+    global data_desejada
+    global data_popular
+
     logger.info('Transformando dados')
     # REORDENANDO COLUNAS
     data = data[['Posicao', 'Nome', 'Qnt_Normal', 'Qnt_FULL',
-                       'Media_Preco', 'Mediana_Preco', 'Media_Vendas', 'Mediana_Vendas',
-                       'Link', 'GoogleTrends', 'scrapy_datetime']]
+                 'Media_Preco', 'Mediana_Preco', 'Media_Vendas', 'Mediana_Vendas',
+                 'Link', 'GoogleTrends', 'scrapy_datetime']]
 
     # CRIANDO 3 DATAFRAMES DIFERENTES
     data_crescimento = data.loc[data['Posicao'].str.contains('CRESCIMENTO')]
@@ -210,15 +193,36 @@ def transformacao(data):
     data_desejada['Posicao'] = data_desejada['Posicao'].str.extract('(\d+)').astype(int)
     data_popular['Posicao'] = data_popular['Posicao'].str.extract('(\d+)').astype(int)
 
-    logger.info('Salvando CSV')
-    # SALVANDO EXCEL
-    data_crescimento.to_csv("CSV/produtos_crescimento.csv", index=False, encoding='utf-8')
-    data_desejada.to_csv("CSV/produtos_desejado.csv", index=False, encoding='utf-8')
-    data_popular.to_csv("CSV/produtos_popular.csv", index=False, encoding='utf-8')
+
+@st.cache(allow_output_mutation=True)
+def start_streamlit():
+    st.title("Produtos que mais Cresceram")
+    st.write(data_crescimento)
+    st.title("Produtos mais Desejados")
+    st.write(data_desejada)
+    st.title("Produtos mais Populares")
+    st.write(data_popular)
 
 if __name__ == "__main__":
+    # Settings Driver
+    option = Options()
+    option.headless = True
+    navegador = webdriver.Firefox(options=option)
+    pd.set_option('mode.chained_assignment', None)
+    navegador.maximize_window()
+
+    # Settings Logger
+    logging.basicConfig(filename='Logs/tendencias_ml.txt', format='%(asctime)s - %(levelname)s - %(name)s - %(message)s', datefmt='%Y-%m-%d %H:%M:%S', level=logging.INFO)
+    logger = logging.getLogger('tendencias_ml')
+
+    # Settings Streamlit
+    st.set_page_config(page_title='Tendencias', layout='wide')
+
+    # Mkdir
+    if not os.path.exists('Logs'):
+        os.makedirs('Logs')
+
     pagina_tendencias()
     pagina_produtos(data)
     transformacao(data)
-    logger.info('Salvando no SQLite')
-    start_sqlite()
+    start_streamlit()
