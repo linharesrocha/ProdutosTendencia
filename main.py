@@ -7,8 +7,7 @@ from selenium.webdriver.common.by import By
 from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-from selenium.webdriver.firefox.service import Service
-from SQL.sql import start_sqlite
+#from SQL.sql import start_sqlite
 import pandas as pd
 from datetime import datetime
 import statistics
@@ -80,9 +79,10 @@ def pagina_tendencias():
 def pagina_produtos(data):
     # ACESSA CADA PRODUTO TENDENDIA, -> 1PRIMEIRO PRODUTO TENDENCIA, 2PRODUTO TENDENCIAS E
     # ACESSA TODOS ELES UM DE CADA VEZ
-    # for z in range(len(data)):
-    for z in range(2):
+    for z in range(len(data)):
+    #for z in range(2):
         # print("{} / {}".format(z, len(data)))
+        logger.info('%s de %s', z, len(data))
 
         url = data.loc[z, "Link"]
         logger.info('Acessando %s', url)
@@ -123,11 +123,11 @@ def pagina_produtos(data):
 
         # ACESSA CADA PRODUTO DENTRO DA ATUAL CATEGORIA/TENDENCIA
         # TIRAR MEDIA DE QUANTIDADE DE VENDAS, PRECO
-        # products_length = len(product_link)
-        # products_length = round(products_length / 3)
-        # for i in range(products_length):
-        logger.info('Comecando JOB de acessar cada produto para coletar estatisticas')
-        for i in range(3):
+        products_length = len(product_link)
+        products_length = round(products_length / 3)
+        for i in range(products_length):
+            logger.info('Acessando cada anuncio para coletar preco e venda')
+        #for i in range(3):
             logger.info('Acessando %s', product_link[i])
             navegador.get(product_link[i])
             page_content = navegador.page_source
@@ -152,7 +152,7 @@ def pagina_produtos(data):
         products_sales = list(map(int, products_sales))
         products_sales_mean = int(statistics.mean(products_sales))
         products_sales_median = int(statistics.median(products_sales))
-        products_price_mean = round(float(statistics.mean(products_price)), 2)
+        products_price_mean = round(int(statistics.mean(products_price)), 2)
         products_price_median = round(statistics.median(products_price), 2)
 
         # CRIANDO NOVAS COLUNAS
@@ -201,12 +201,14 @@ def transformacao(data):
 
 
 if __name__ == "__main__":
-    # Configurações
+    # Configurações Driver
     option = Options()
     option.headless = True
     navegador = webdriver.Firefox(options=option)
-    pd.set_option('mode.chained_assignment', None)
     navegador.maximize_window()
+
+    # Disable Logs Pandas
+    pd.set_option('mode.chained_assignment', None)
 
     # Mkdir
     if not os.path.exists('Logs'):
@@ -214,14 +216,14 @@ if __name__ == "__main__":
     if not os.path.exists('CSV'):
         os.makedirs('CSV')
 
-    logging.basicConfig(filename='Logs/tendencias_ml.txt',
-                        format='%(asctime)s - %(levelname)s - %(name)s - %(message)s',
-                        datefmt='%Y-%m-%d %H:%M:%S',
-                        level=logging.INFO)
+    #Logging
+    logging.basicConfig(filename='Logs/tendencias_ml.txt', format='%(asctime)s - %(levelname)s - %(name)s - %(message)s', datefmt='%Y-%m-%d %H:%M:%S', level=logging.INFO)
     logger = logging.getLogger('tendencias_ml')
 
+    # Call Functions
     pagina_tendencias()
     pagina_produtos(data)
     transformacao(data)
-    logger.info('Salvando no SQLite')
-    start_sqlite()
+    #start_sqlite()
+    #logger.info('Salvo no SQL')
+    logger.info('FIM')
