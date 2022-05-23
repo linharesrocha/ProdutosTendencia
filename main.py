@@ -129,7 +129,6 @@ def pagina_produtos(data):
         for i in range(products_length):
             logger.info('Acessando cada anuncio para coletar preco e venda')
         #for i in range(3):
-            time.sleep(30)
             logger.info('Acessando %s', product_link[i])
             navegador.get(product_link[i])
             page_content = navegador.page_source
@@ -148,7 +147,7 @@ def pagina_produtos(data):
             else:
                 products_sales.append('0')
 
-            navegador.quit()
+            time.sleep(30)
 
         logger.info('Manilupando dados coletados')
         # MANIPULANDO DADOS
