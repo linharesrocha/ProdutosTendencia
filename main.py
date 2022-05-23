@@ -73,7 +73,7 @@ def pagina_tendencias():
 
 def pagina_produtos(data):
     for z in range(len(data)):
-        # print("{} / {}".format(z, len(data)))
+        print("{} / {}".format(z, len(data)))
         logger.info('%s de %s', z, len(data))
 
         url = data.loc[z, "Link"]
@@ -119,9 +119,7 @@ def transformacao(data):
 
     logger.info('Transformando dados')
     # REORDENANDO COLUNAS
-    data = data[['Posicao', 'Nome', 'Qnt_Normal', 'Qnt_FULL',
-                 'Media_Preco', 'Mediana_Preco', 'Media_Vendas', 'Mediana_Vendas',
-                 'Link', 'GoogleTrends', 'scrapy_datetime']]
+    data = data[['Posicao', 'Nome', 'Qnt_Normal', 'Qnt_FULL', 'Link', 'GoogleTrends', 'scrapy_datetime']]
 
     # CRIANDO 3 DATAFRAMES DIFERENTES
     data_crescimento = data.loc[data['Posicao'].str.contains('CRESCIMENTO')]
