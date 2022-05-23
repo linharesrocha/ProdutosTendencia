@@ -73,7 +73,7 @@ def pagina_tendencias():
 
 def pagina_produtos(data):
     for z in range(len(data)):
-        print("{} / {}".format(z, len(data)))
+        print("{} / {}".format(z+1, len(data)))
         logger.info('%s de %s', z, len(data))
 
         url = data.loc[z, "Link"]
@@ -87,7 +87,7 @@ def pagina_produtos(data):
         # Qntd anúncios normal
         logger.info('Buscando quantidade de anuncios normal')
         product_normal_quantity = site.find('span', class_="ui-search-search-result__quantity-results").getText()
-        product_normal_quantity = int(re.search(r'\d+', product_normal_quantity).group())
+        product_normal_quantity = int(re.sub('[^0-9]','', product_normal_quantity))
 
         logger.info('Buscando quantidade de anuncios full')
         try:
@@ -95,7 +95,7 @@ def pagina_produtos(data):
             page_content = navegador.page_source
             site = BeautifulSoup(page_content, 'html.parser')
             product_full_quantity = site.find('span', class_="ui-search-search-result__quantity-results").getText()
-            product_full_quantity = int(re.search(r'\d+', product_full_quantity).group())
+            product_full_quantity = int(re.sub('[^0-9]','', product_full_quantity))
         except AttributeError:
             product_full_quantity = 0
 
