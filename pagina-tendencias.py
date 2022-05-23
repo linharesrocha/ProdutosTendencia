@@ -7,7 +7,11 @@ from selenium.webdriver.common.by import By
 from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+<<<<<<< HEAD:main.py
 #from SQL.sql import start_sqlite
+=======
+from sql import start_sqlite
+>>>>>>> parent of 9a5d762 (modularizando main):pagina-tendencias.py
 import pandas as pd
 from datetime import datetime
 import statistics
@@ -29,6 +33,26 @@ def waituntil(driver, class_):
         WebDriverWait(driver, 10).until(element_present)
 
 
+<<<<<<< HEAD:main.py
+=======
+# Configurações
+option = Options()
+option.headless = True
+navegador = webdriver.Firefox(options=option)
+pd.set_option('mode.chained_assignment', None)
+navegador.maximize_window()
+
+#Logging
+if not os.path.exists('Logs'):
+    os.makedirs('Logs')
+logging.basicConfig(filename='Logs/tendencias_ml.txt',
+                    format='%(asctime)s - %(levelname)s - %(name)s - %(message)s',
+                    datefmt='%Y-%m-%d %H:%M:%S',
+                    level=logging.INFO)
+logger = logging.getLogger('tendencias_ml')
+
+
+>>>>>>> parent of 9a5d762 (modularizando main):pagina-tendencias.py
 def pagina_tendencias():
     global data
     data = pd.DataFrame()
@@ -179,6 +203,7 @@ def transformacao(data):
     data_desejada['Posicao'] = data_desejada['Posicao'].str.extract('(\d+)').astype(int)
     data_popular['Posicao'] = data_popular['Posicao'].str.extract('(\d+)').astype(int)
 
+<<<<<<< HEAD:main.py
 
 def start_streamlit():
     st.title("Produtos que mais Cresceram")
@@ -187,6 +212,13 @@ def start_streamlit():
     st.write(data_desejada)
     st.title("Produtos mais Populares")
     st.write(data_popular)
+=======
+    logger.info('Salvando CSV')
+    # SALVANDO EXCEL
+    data_crescimento.to_csv("produtos_crescimento.csv", index=False, encoding='utf-8')
+    data_desejada.to_csv("produtos_desejado.csv", index=False, encoding='utf-8')
+    data_popular.to_csv("produtos_popular.csv", index=False, encoding='utf-8')
+>>>>>>> parent of 9a5d762 (modularizando main):pagina-tendencias.py
 
 if __name__ == "__main__":
     # Settings Driver
