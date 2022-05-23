@@ -7,17 +7,14 @@ from selenium.webdriver.common.by import By
 from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-<<<<<<< HEAD:main.py
-#from SQL.sql import start_sqlite
-=======
-from sql import start_sqlite
->>>>>>> parent of 9a5d762 (modularizando main):pagina-tendencias.py
+from selenium.webdriver.firefox.service import Service
+from SQL.sql import start_sqlite
 import pandas as pd
 from datetime import datetime
 import statistics
 import re
+import logging
 import os
-import streamlit as st
 
 
 # Functions
@@ -33,27 +30,8 @@ def waituntil(driver, class_):
         WebDriverWait(driver, 10).until(element_present)
 
 
-<<<<<<< HEAD:main.py
-=======
-# Configurações
-option = Options()
-option.headless = True
-navegador = webdriver.Firefox(options=option)
-pd.set_option('mode.chained_assignment', None)
-navegador.maximize_window()
-
-#Logging
-if not os.path.exists('Logs'):
-    os.makedirs('Logs')
-logging.basicConfig(filename='Logs/tendencias_ml.txt',
-                    format='%(asctime)s - %(levelname)s - %(name)s - %(message)s',
-                    datefmt='%Y-%m-%d %H:%M:%S',
-                    level=logging.INFO)
-logger = logging.getLogger('tendencias_ml')
-
-
->>>>>>> parent of 9a5d762 (modularizando main):pagina-tendencias.py
 def pagina_tendencias():
+    logger.info('Inicio da Coleta de Dados dos Produtos Tendencias')
     global data
     data = pd.DataFrame()
     data['Posicao'] = 'NA'
@@ -96,16 +74,18 @@ def pagina_tendencias():
     return data
 
     navegador.quit()
+    logger.info('FIM')
 
 
 def pagina_produtos(data):
     # ACESSA CADA PRODUTO TENDENDIA, -> 1PRIMEIRO PRODUTO TENDENCIA, 2PRODUTO TENDENCIAS E
     # ACESSA TODOS ELES UM DE CADA VEZ
-    for z in range(len(data)):
-    #for z in range(2):
-        print("{} / {}".format(z, len(data)))
+    # for z in range(len(data)):
+    for z in range(2):
+        # print("{} / {}".format(z, len(data)))
 
         url = data.loc[z, "Link"]
+        logger.info('Acessando %s', url)
         navegador.get(url)
 
         waituntil(navegador, 'ui-search-search-result__quantity-results')
@@ -113,9 +93,11 @@ def pagina_produtos(data):
         site = BeautifulSoup(page_content, 'html.parser')
 
         # Qntd anúncios normal
+        logger.info('Buscando quantidade de anuncios normal')
         product_normal_quantity = site.find('span', class_="ui-search-search-result__quantity-results").getText()
         product_normal_quantity = int(re.search(r'\d+', product_normal_quantity).group())
 
+        logger.info('Buscando quantidade de anuncios full')
         try:
             navegador.get(url + "_Frete_Full")
             page_content = navegador.page_source
@@ -125,12 +107,14 @@ def pagina_produtos(data):
         except AttributeError:
             product_full_quantity = 0
 
+        logger.info('Retoma pagina de pesquisa')
         navegador.get(url)
         page_content = navegador.page_source
         site = BeautifulSoup(page_content, 'html.parser')
         waituntil(navegador, 'ui-search-result__bookmark')
 
         # TODOS OS PRODUTOS DA CATEGORIA ATUAL
+        logger.info('Coleta todos produtos da categoria atual')
         container = site.find(class_='ui-search-results')
         product_container = container.findAll('li', class_='ui-search-layout__item')
         product_link = [p.find('a', href=True).get('href') for p in product_container]
@@ -139,15 +123,18 @@ def pagina_produtos(data):
 
         # ACESSA CADA PRODUTO DENTRO DA ATUAL CATEGORIA/TENDENCIA
         # TIRAR MEDIA DE QUANTIDADE DE VENDAS, PRECO
-        products_length = len(product_link)
-        products_length = round(products_length / 3)
-        for i in range(products_length):
-        #for i in range(3):
+        # products_length = len(product_link)
+        # products_length = round(products_length / 3)
+        # for i in range(products_length):
+        logger.info('Comecando JOB de acessar cada produto para coletar estatisticas')
+        for i in range(3):
+            logger.info('Acessando %s', product_link[i])
             navegador.get(product_link[i])
             page_content = navegador.page_source
             site = BeautifulSoup(page_content, 'html.parser')
             product = site.find(class_='pb-40')
 
+            logger.info('Buscando preco e vendas')
             price_fraction = product.find('span', class_='andes-money-amount__fraction').getText().replace('.', '')
             products_price.append(price_fraction)
 
@@ -159,12 +146,13 @@ def pagina_produtos(data):
             else:
                 products_sales.append('0')
 
+        logger.info('Manilupando dados coletados')
         # MANIPULANDO DADOS
         products_price = list(map(int, products_price))
         products_sales = list(map(int, products_sales))
         products_sales_mean = int(statistics.mean(products_sales))
         products_sales_median = int(statistics.median(products_sales))
-        products_price_mean = round(int(statistics.mean(products_price)), 2)
+        products_price_mean = round(float(statistics.mean(products_price)), 2)
         products_price_median = round(statistics.median(products_price), 2)
 
         # CRIANDO NOVAS COLUNAS
@@ -188,6 +176,7 @@ def transformacao(data):
     global data_desejada
     global data_popular
 
+    logger.info('Transformando dados')
     # REORDENANDO COLUNAS
     data = data[['Posicao', 'Nome', 'Qnt_Normal', 'Qnt_FULL',
                  'Media_Preco', 'Mediana_Preco', 'Media_Vendas', 'Mediana_Vendas',
@@ -198,44 +187,41 @@ def transformacao(data):
     data_desejada = data.loc[data['Posicao'].str.contains('DESEJADA')]
     data_popular = data.loc[data['Posicao'].str.contains('POPULAR')]
 
+    logger.warning('Atualizar esse trecho')
     # REMOVENDO STRING E CONVERTENDO POSICAO PARA INT
     data_crescimento['Posicao'] = data_crescimento['Posicao'].str.extract('(\d+)').astype(int)
     data_desejada['Posicao'] = data_desejada['Posicao'].str.extract('(\d+)').astype(int)
     data_popular['Posicao'] = data_popular['Posicao'].str.extract('(\d+)').astype(int)
 
-<<<<<<< HEAD:main.py
-
-def start_streamlit():
-    st.title("Produtos que mais Cresceram")
-    st.write(data_crescimento)
-    st.title("Produtos mais Desejados")
-    st.write(data_desejada)
-    st.title("Produtos mais Populares")
-    st.write(data_popular)
-=======
     logger.info('Salvando CSV')
     # SALVANDO EXCEL
-    data_crescimento.to_csv("produtos_crescimento.csv", index=False, encoding='utf-8')
-    data_desejada.to_csv("produtos_desejado.csv", index=False, encoding='utf-8')
-    data_popular.to_csv("produtos_popular.csv", index=False, encoding='utf-8')
->>>>>>> parent of 9a5d762 (modularizando main):pagina-tendencias.py
+    data_crescimento.to_csv("CSV/produtos_crescimento.csv", index=False, encoding='utf-8')
+    data_desejada.to_csv("CSV/produtos_desejado.csv", index=False, encoding='utf-8')
+    data_popular.to_csv("CSV/produtos_popular.csv", index=False, encoding='utf-8')
+
 
 if __name__ == "__main__":
-    # Settings Driver
+    # Configurações
+    option = Options()
+    option.headless = True
+    navegador = webdriver.Firefox(options=option)
     pd.set_option('mode.chained_assignment', None)
-    chrome_options = webdriver.ChromeOptions()
-    chrome_options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
-    chrome_options.add_argument("--headless")
-    chrome_options.add_argument("--disable-dev-shm-usage")
-    chrome_options.add_argument("--no-sandbox")
-    navegador = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), chrome_options=chrome_options)
     navegador.maximize_window()
 
+    # Mkdir
+    if not os.path.exists('Logs'):
+        os.makedirs('Logs')
+    if not os.path.exists('CSV'):
+        os.makedirs('CSV')
 
-    # Settings Streamlit
-    st.set_page_config(page_title='Tendencias', layout='wide')
+    logging.basicConfig(filename='Logs/tendencias_ml.txt',
+                        format='%(asctime)s - %(levelname)s - %(name)s - %(message)s',
+                        datefmt='%Y-%m-%d %H:%M:%S',
+                        level=logging.INFO)
+    logger = logging.getLogger('tendencias_ml')
 
     pagina_tendencias()
     pagina_produtos(data)
     transformacao(data)
-    start_streamlit()
+    logger.info('Salvando no SQLite')
+    start_sqlite()
