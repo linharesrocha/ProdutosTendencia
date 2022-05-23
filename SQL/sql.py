@@ -18,10 +18,6 @@ def start_sqlite():
       Nome TEXT,
       Qnt_Normal INTEGER,
       Qnt_FULL INTEGER,
-      Media_Preco REAL,
-      Mediana_Preco INTEGER,
-      Media_Vendas INTEGER,
-      Mediana_Vendas INTEGER,
       Link TEXT,
       GoogleTrends TEXT,
       scrapy_datetime TEXT
@@ -34,10 +30,6 @@ def start_sqlite():
       Nome TEXT,
       Qnt_Normal INTEGER,
       Qnt_FULL INTEGER,
-      Media_Preco REAL,
-      Mediana_Preco INTEGER,
-      Media_Vendas INTEGER,
-      Mediana_Vendas INTEGER,
       Link TEXT,
       GoogleTrends TEXT,
       scrapy_datetime TEXT
@@ -50,10 +42,6 @@ def start_sqlite():
       Nome TEXT,
       Qnt_Normal INTEGER,
       Qnt_FULL INTEGER,
-      Media_Preco REAL,
-      Mediana_Preco INTEGER,
-      Media_Vendas INTEGER,
-      Mediana_Vendas INTEGER,
       Link TEXT,
       GoogleTrends TEXT,
       scrapy_datetime TEXT

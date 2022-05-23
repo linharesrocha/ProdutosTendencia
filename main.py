@@ -10,8 +10,6 @@ from selenium.webdriver.support import expected_conditions as EC
 #from SQL.sql import start_sqlite
 import pandas as pd
 from datetime import datetime
-import statistics
-import time
 import re
 import logging
 import os
@@ -64,10 +62,6 @@ def pagina_tendencias():
 
     data['Qnt_Normal'] = 0
     data['Qnt_FULL'] = 0
-    data['Media_Preco'] = 0
-    data['Mediana_Preco'] = 0
-    data['Media_Vendas'] = 0
-    data['Mediana_Vendas'] = 0
     data['GoogleTrends'] = 'NA'
     data['scrapy_datetime'] = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
 
@@ -78,10 +72,7 @@ def pagina_tendencias():
 
 
 def pagina_produtos(data):
-    # ACESSA CADA PRODUTO TENDENDIA, -> 1PRIMEIRO PRODUTO TENDENCIA, 2PRODUTO TENDENCIAS E
-    # ACESSA TODOS ELES UM DE CADA VEZ
     for z in range(len(data)):
-    #for z in range(2):
         # print("{} / {}".format(z, len(data)))
         logger.info('%s de %s', z, len(data))
 
@@ -108,63 +99,10 @@ def pagina_produtos(data):
         except AttributeError:
             product_full_quantity = 0
 
-        logger.info('Retoma pagina de pesquisa')
-        navegador.get(url)
-        page_content = navegador.page_source
-        site = BeautifulSoup(page_content, 'html.parser')
-        waituntil(navegador, 'ui-search-result__bookmark')
-
-        # TODOS OS PRODUTOS DA CATEGORIA ATUAL
-        logger.info('Coleta todos produtos da categoria atual')
-        container = site.find(class_='ui-search-results')
-        product_container = container.findAll('li', class_='ui-search-layout__item')
-        product_link = [p.find('a', href=True).get('href') for p in product_container]
-        products_price = []
-        products_sales = []
-
-        # ACESSA CADA PRODUTO DENTRO DA ATUAL CATEGORIA/TENDENCIA
-        # TIRAR MEDIA DE QUANTIDADE DE VENDAS, PRECO
-        products_length = len(product_link)
-        products_length = round(products_length / 3)
-        for i in range(products_length):
-            logger.info('Acessando cada anuncio para coletar preco e venda')
-        #for i in range(3):
-            logger.info('Acessando %s', product_link[i])
-            navegador.get(product_link[i])
-            page_content = navegador.page_source
-            site = BeautifulSoup(page_content, 'html.parser')
-            product = site.find(class_='pb-40')
-
-            logger.info('Buscando preco e vendas')
-            price_fraction = product.find('span', class_='andes-money-amount__fraction').getText().replace('.', '')
-            products_price.append(price_fraction)
-
-            sales = product.find('span', class_='ui-pdp-subtitle').getText()
-            if sales != 'Novo':  # Diferente de 0 Vendas
-                products_sales_clean = re.findall('[0-9]+', sales)
-                products_sales_clean = ''.join(map(str, products_sales_clean))
-                products_sales.append(products_sales_clean)
-            else:
-                products_sales.append('0')
-
-            time.sleep(30)
-
-        logger.info('Manilupando dados coletados')
-        # MANIPULANDO DADOS
-        products_price = list(map(int, products_price))
-        products_sales = list(map(int, products_sales))
-        products_sales_mean = int(statistics.mean(products_sales))
-        products_sales_median = int(statistics.median(products_sales))
-        products_price_mean = round(int(statistics.mean(products_price)), 2)
-        products_price_median = round(statistics.median(products_price), 2)
-
         # CRIANDO NOVAS COLUNAS
         data.loc[z, 'Qnt_Normal'] = product_normal_quantity
         data.loc[z, 'Qnt_FULL'] = product_full_quantity
-        data.loc[z, 'Media_Preco'] = products_price_mean
-        data.loc[z, 'Mediana_Preco'] = products_price_median
-        data.loc[z, 'Media_Vendas'] = products_sales_mean
-        data.loc[z, 'Mediana_Vendas'] = products_sales_median
+
 
         url_gtrends = "https://trends.google.com.br/trends/explore?geo=BR&q="
         name_product = data.loc[z, 'Nome']
