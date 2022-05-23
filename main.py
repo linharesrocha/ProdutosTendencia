@@ -77,9 +77,9 @@ def pagina_tendencias():
 def pagina_produtos(data):
     # ACESSA CADA PRODUTO TENDENDIA, -> 1PRIMEIRO PRODUTO TENDENCIA, 2PRODUTO TENDENCIAS E
     # ACESSA TODOS ELES UM DE CADA VEZ
-    # for z in range(len(data)):
-    for z in range(2):
-        # print("{} / {}".format(z, len(data)))
+    for z in range(len(data)):
+    #for z in range(2):
+        print("{} / {}".format(z, len(data)))
 
         url = data.loc[z, "Link"]
         navegador.get(url)
@@ -115,10 +115,10 @@ def pagina_produtos(data):
 
         # ACESSA CADA PRODUTO DENTRO DA ATUAL CATEGORIA/TENDENCIA
         # TIRAR MEDIA DE QUANTIDADE DE VENDAS, PRECO
-        # products_length = len(product_link)
-        # products_length = round(products_length / 3)
-        # for i in range(products_length):
-        for i in range(3):
+        products_length = len(product_link)
+        products_length = round(products_length / 3)
+        for i in range(products_length):
+        #for i in range(3):
             navegador.get(product_link[i])
             page_content = navegador.page_source
             site = BeautifulSoup(page_content, 'html.parser')
