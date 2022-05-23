@@ -11,6 +11,7 @@ from selenium.webdriver.support import expected_conditions as EC
 import pandas as pd
 from datetime import datetime
 import statistics
+import time
 import re
 import logging
 import os
@@ -128,6 +129,7 @@ def pagina_produtos(data):
         for i in range(products_length):
             logger.info('Acessando cada anuncio para coletar preco e venda')
         #for i in range(3):
+            time.sleep(30)
             logger.info('Acessando %s', product_link[i])
             navegador.get(product_link[i])
             page_content = navegador.page_source
@@ -145,6 +147,8 @@ def pagina_produtos(data):
                 products_sales.append(products_sales_clean)
             else:
                 products_sales.append('0')
+
+            navegador.quit()
 
         logger.info('Manilupando dados coletados')
         # MANIPULANDO DADOS
