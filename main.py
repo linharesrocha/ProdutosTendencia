@@ -74,7 +74,8 @@ def pagina_tendencias():
 
 
 def pagina_produtos(data):
-    for z in range(len(data)):
+    #for z in range(len(data)):
+    for z in range(2):
         print("{} / {}".format(z+1, len(data)))
         logger.info('%s de %s', z, len(data))
 
@@ -110,8 +111,9 @@ def pagina_produtos(data):
         name_product = data.loc[z, 'Nome']
         data.loc[z, 'GoogleTrends'] = url_gtrends + name_product
 
-    return data
     navegador.quit()
+    return data
+
 
 
 def transformacao(data):
@@ -135,11 +137,26 @@ def transformacao(data):
     data_popular['Posicao'] = data_popular['Posicao'].str.extract('(\d+)').astype(int)
 
     logger.info('Salvando XLSX')
-    # SALVANDO EXCEL
     writer = pd.ExcelWriter('XLSX/esporte_e_fitness.xlsx', engine='xlsxwriter')
     data_crescimento.to_excel(writer, sheet_name='Crescimento', index=False)
     data_desejada.to_excel(writer, sheet_name='Desejados', index=False)
     data_popular.to_excel(writer, sheet_name='Popular', index=False)
+
+    for column in data_crescimento:
+        column_length = max(data_crescimento[column].astype(str).map(len).max(), len(column))
+        col_idx = data_crescimento.columns.get_loc(column)
+        writer.sheets['Crescimento'].set_column(col_idx, col_idx, column_length)
+
+    for column in data_desejada:
+        column_length = max(data_desejada[column].astype(str).map(len).max(), len(column))
+        col_idx = data_desejada.columns.get_loc(column)
+        writer.sheets['Desejados'].set_column(col_idx, col_idx, column_length)
+
+    for column in data_popular:
+        column_length = max(data_popular[column].astype(str).map(len).max(), len(column))
+        col_idx = data_popular.columns.get_loc(column)
+        writer.sheets['Popular'].set_column(col_idx, col_idx, column_length)
+
     writer.save()
 
 

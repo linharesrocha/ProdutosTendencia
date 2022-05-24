@@ -6,7 +6,7 @@ from dotenv import load_dotenv
 
 def bot_slack():
     # Settings
-    env_path = Path('.') / 'Slack/.env'
+    env_path = Path('.') / 'C:\workspace\ProdutosTendencia\Slack\.env'
     load_dotenv(dotenv_path=env_path)
     app = slack.WebClient(token=os.environ['SLACK_TOKEN'])
 
