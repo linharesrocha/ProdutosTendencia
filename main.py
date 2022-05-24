@@ -74,8 +74,7 @@ def pagina_tendencias():
 
 
 def pagina_produtos(data):
-    #for z in range(len(data)):
-    for z in range(3):
+    for z in range(len(data)):
         print("{} / {}".format(z+1, len(data)))
         logger.info('%s de %s', z, len(data))
 
