@@ -15,6 +15,9 @@ import os
 
 
 # Functions
+from Slack.bot import bot_slack
+
+
 def waituntil(driver, class_):
     try:
         element_present = EC.presence_of_element_located((By.CLASS_NAME, class_))
@@ -62,7 +65,7 @@ def pagina_tendencias():
     data['Qnt_Normal'] = 0
     data['Qnt_FULL'] = 0
     data['GoogleTrends'] = 'NA'
-    data['scrapy_datetime'] = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+    data['UltimaAtualizacao'] = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
 
     return data
 
@@ -71,7 +74,8 @@ def pagina_tendencias():
 
 
 def pagina_produtos(data):
-    for z in range(len(data)):
+    #for z in range(len(data)):
+    for z in range(3):
         print("{} / {}".format(z+1, len(data)))
         logger.info('%s de %s', z, len(data))
 
@@ -118,7 +122,7 @@ def transformacao(data):
 
     logger.info('Transformando dados')
     # REORDENANDO COLUNAS
-    data = data[['Posicao', 'Nome', 'Qnt_Normal', 'Qnt_FULL', 'Link', 'GoogleTrends', 'scrapy_datetime']]
+    data = data[['Posicao', 'Nome', 'Qnt_Normal', 'Qnt_FULL', 'Link', 'GoogleTrends', 'UltimaAtualizacao']]
 
     # CRIANDO 3 DATAFRAMES DIFERENTES
     data_crescimento = data.loc[data['Posicao'].str.contains('CRESCIMENTO')]
@@ -131,11 +135,13 @@ def transformacao(data):
     data_desejada['Posicao'] = data_desejada['Posicao'].str.extract('(\d+)').astype(int)
     data_popular['Posicao'] = data_popular['Posicao'].str.extract('(\d+)').astype(int)
 
-    logger.info('Salvando CSV')
+    logger.info('Salvando XLSX')
     # SALVANDO EXCEL
-    data_crescimento.to_csv("CSV/produtos_crescimento.csv", index=False, encoding='utf-8')
-    data_desejada.to_csv("CSV/produtos_desejado.csv", index=False, encoding='utf-8')
-    data_popular.to_csv("CSV/produtos_popular.csv", index=False, encoding='utf-8')
+    writer = pd.ExcelWriter('XLSX/esporte_e_fitness.xlsx', engine='xlsxwriter')
+    data_crescimento.to_excel(writer, sheet_name='Crescimento', index=False)
+    data_desejada.to_excel(writer, sheet_name='Desejados', index=False)
+    data_popular.to_excel(writer, sheet_name='Popular', index=False)
+    writer.save()
 
 
 if __name__ == "__main__":
@@ -151,8 +157,8 @@ if __name__ == "__main__":
     # Mkdir
     if not os.path.exists('Logs'):
         os.makedirs('Logs')
-    if not os.path.exists('CSV'):
-        os.makedirs('CSV')
+    if not os.path.exists('XLSX'):
+        os.makedirs('XLSX')
 
     #Logging
     logging.basicConfig(filename='Logs/tendencias_ml.txt', format='%(asctime)s - %(levelname)s - %(name)s - %(message)s', datefmt='%Y-%m-%d %H:%M:%S', level=logging.INFO)
@@ -162,6 +168,5 @@ if __name__ == "__main__":
     pagina_tendencias()
     pagina_produtos(data)
     transformacao(data)
-    #start_sqlite()
-    #logger.info('Salvo no SQL')
+    bot_slack()
     logger.info('FIM')
