@@ -74,8 +74,8 @@ def pagina_tendencias():
 
 
 def pagina_produtos(data):
-    #for z in range(len(data)):
-    for z in range(2):
+    for z in range(len(data)):
+    #for z in range(2):
         print("{} / {}".format(z+1, len(data)))
         logger.info('%s de %s', z, len(data))
 
@@ -181,8 +181,8 @@ if __name__ == "__main__":
     logger = logging.getLogger('tendencias_ml')
 
     # Call Functions
-    pagina_tendencias()
-    pagina_produtos(data)
-    transformacao(data)
+    #pagina_tendencias()
+    #pagina_produtos(data)
+    #transformacao(data)
     bot_slack()
     logger.info('FIM')
