@@ -22,7 +22,7 @@ def waituntil(driver, class_):
         element_present = EC.presence_of_element_located((By.CLASS_NAME, class_))
         WebDriverWait(driver, 10).until(element_present)
     except TimeoutException:
-        print('Timed out waiting for page to load')
+        print('Classe nao encontrada' + class_)
 
 
 def pagina_tendencias(url_list):
@@ -55,7 +55,7 @@ def pagina_tendencias(url_list):
             data.loc[aux, 'Link_ML'] = product.find('a', href=True).get('href').replace('#trend', '')
             aux += 1
 
-    data['Qnt_Normal'] = 0
+    data['Qnt_ML'] = 0
     data['Qnt_FULL'] = 0
     data['Qnt_Netshoes'] = 0
     data['GoogleTrends'] = 'NA'
@@ -67,8 +67,8 @@ def pagina_tendencias(url_list):
 
 
 def pagina_produtos(data):
-    #for z in range(len(data)):
-    for z in range(2):
+    for z in range(len(data)):
+    #for z in range(2):
         url = data.loc[z, "Link_ML"]
         navegador.get(url)
 
@@ -90,7 +90,7 @@ def pagina_produtos(data):
             product_full_quantity = 0
 
         # CRIANDO NOVAS COLUNAS
-        data.loc[z, 'Qnt_Normal'] = product_normal_quantity
+        data.loc[z, 'Qnt_ML'] = product_normal_quantity
         data.loc[z, 'Qnt_FULL'] = product_full_quantity
 
         url_gtrends = "https://trends.google.com.br/trends/explore?geo=BR&q="
@@ -131,7 +131,7 @@ def transformacao(data, name_list):
     global data_popular
 
     # REORDENANDO COLUNAS
-    data = data[['Posicao', 'Nome', 'Qnt_Normal', 'Qnt_FULL', 'Qnt_Netshoes', 'Link_ML', 'GoogleTrends', 'UltimaAtualizacao']]
+    data = data[['Posicao', 'Nome', 'Qnt_ML', 'Qnt_FULL', 'Qnt_Netshoes', 'Link_ML', 'GoogleTrends', 'UltimaAtualizacao']]
 
     # CRIANDO 3 DATAFRAMES DIFERENTES
     data_crescimento = data.loc[data['Posicao'].str.contains('CRESCIMENTO')]
@@ -190,7 +190,7 @@ if __name__ == "__main__":
 
     # Configurações Driver
     option = Options()
-    option.headless = False
+    option.headless = True
     navegador = webdriver.Firefox(options=option)
     navegador.maximize_window()
 
