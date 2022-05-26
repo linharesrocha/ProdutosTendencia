@@ -16,16 +16,13 @@ import os
 from pathlib import Path
 from dotenv import load_dotenv
 
+
 def waituntil(driver, class_):
     try:
         element_present = EC.presence_of_element_located((By.CLASS_NAME, class_))
         WebDriverWait(driver, 10).until(element_present)
     except TimeoutException:
         print('Timed out waiting for page to load')
-        print('Trying again')
-        driver.refresh()
-        element_present = EC.presence_of_element_located((By.CLASS_NAME, class_))
-        WebDriverWait(driver, 10).until(element_present)
 
 
 def pagina_tendencias(url_list):
@@ -60,6 +57,7 @@ def pagina_tendencias(url_list):
 
     data['Qnt_Normal'] = 0
     data['Qnt_FULL'] = 0
+    data['Qnt_Netshoes'] = 0
     data['GoogleTrends'] = 'NA'
     data['UltimaAtualizacao'] = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
 
@@ -71,8 +69,6 @@ def pagina_tendencias(url_list):
 def pagina_produtos(data):
     #for z in range(len(data)):
     for z in range(2):
-        print("{} / {}".format(z + 1, len(data)))
-
         url = data.loc[z, "Link"]
         navegador.get(url)
 
@@ -105,13 +101,37 @@ def pagina_produtos(data):
     return data
 
 
+def netshoes():
+    for i in range(len(data)):
+    #for i in range(2):
+        name_product = data.loc[i, "Nome"]
+        url = 'https://www.netshoes.com.br/busca?nsCat=Natural&q=' + name_product
+        navegador.get(url)
+        waituntil(navegador, 'items-info')
+        page_content = navegador.page_source
+        site = BeautifulSoup(page_content, 'html.parser')
+
+        # Quantidade de anuncios Netshoes
+        try:
+            container = site.find(class_="items-info")
+            product_quantity_string = container.find('span', class_='block').getText()
+            list_numbers_string = re.findall(r'\d+', product_quantity_string)
+            results = list(map(int, list_numbers_string))
+            product_quantity = results[-1]
+            data.loc[i, 'Qnt_Netshoes'] = product_quantity
+        except AttributeError:
+            data.loc[i, 'Qnt_Netshoes'] = 0
+
+
+
+
 def transformacao(data, name_list):
     global data_crescimento
     global data_desejada
     global data_popular
 
     # REORDENANDO COLUNAS
-    data = data[['Posicao', 'Nome', 'Qnt_Normal', 'Qnt_FULL', 'Link', 'GoogleTrends', 'UltimaAtualizacao']]
+    data = data[['Posicao', 'Nome', 'Qnt_Normal', 'Qnt_FULL', 'Qnt_Netshoes', 'Link', 'GoogleTrends', 'UltimaAtualizacao']]
 
     # CRIANDO 3 DATAFRAMES DIFERENTES
     data_crescimento = data.loc[data['Posicao'].str.contains('CRESCIMENTO')]
@@ -145,6 +165,7 @@ def transformacao(data, name_list):
 
     writer.save()
 
+
 def bot_slack(name_list):
     # Settings
     env_path = Path('.') / 'C:\workspace\ProdutosTendencia\Slack\.env'
@@ -169,7 +190,7 @@ if __name__ == "__main__":
 
     # Configurações Driver
     option = Options()
-    option.headless = True
+    option.headless = False
     navegador = webdriver.Firefox(options=option)
     navegador.maximize_window()
 
@@ -186,5 +207,6 @@ if __name__ == "__main__":
     for l in range(len(url_list)):
         pagina_tendencias(url_list)
         pagina_produtos(data)
+        netshoes()
         transformacao(data, name_list)
         bot_slack(name_list)
