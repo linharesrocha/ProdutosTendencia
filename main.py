@@ -69,8 +69,8 @@ def pagina_tendencias(url_list):
 
 
 def pagina_produtos(data):
-    for z in range(len(data)):
-    #for z in range(2):
+    #for z in range(len(data)):
+    for z in range(2):
         print("{} / {}".format(z + 1, len(data)))
 
         url = data.loc[z, "Link"]
@@ -123,7 +123,7 @@ def transformacao(data, name_list):
     data_desejada['Posicao'] = data_desejada['Posicao'].str.extract('(\d+)').astype(int)
     data_popular['Posicao'] = data_popular['Posicao'].str.extract('(\d+)').astype(int)
 
-    writer = pd.ExcelWriter('XLSX/' + name_list[l], engine='xlsxwriter')
+    writer = pd.ExcelWriter('XLSX/' + name_list[l] + '-' + d1 + '.xlsx', engine='xlsxwriter')
     data_crescimento.to_excel(writer, sheet_name='Crescimento', index=False)
     data_desejada.to_excel(writer, sheet_name='Desejados', index=False)
     data_popular.to_excel(writer, sheet_name='Popular', index=False)
@@ -151,13 +151,9 @@ def bot_slack(name_list):
     load_dotenv(dotenv_path=env_path)
     app = slack.WebClient(token=os.environ['SLACK_TOKEN'])
 
-    # # Formating Date
-    # today = date.today()
-    # d1 = today.strftime("%d/%m/%Y")
-    #
     # # Seding
     # app.chat_postMessage(channel='produtos-tendencia-test', text="PRODUTOS TENDÊNCIAS - " + d1)
-    app.files_upload(channels='produtos-tendencia', file='XLSX/' + name_list[l])
+    app.files_upload(channels='produtos-tendencia-test', file='XLSX/' + name_list[l] + '-' + d1 + '.xlsx')
 
 
 if __name__ == "__main__":
@@ -165,7 +161,11 @@ if __name__ == "__main__":
                 'https://tendencias.mercadolivre.com.br/1430-calcados__roupas_e_bolsas',
                 'https://tendencias.mercadolivre.com.br/264586-saude']
 
-    name_list = ['esportes_e_fitness.xlsx', 'calcados__roupas_e_bolsas.xlsx', 'saude.xlsx']
+    name_list = ['esportes_e_fitness', 'calcados__roupas_e_bolsas', 'saude']
+
+    # Formating Date
+    today = date.today()
+    d1 = today.strftime("%d-%m-%Y")
 
     # Configurações Driver
     option = Options()
