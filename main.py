@@ -10,7 +10,6 @@ from selenium.webdriver.support import expected_conditions as EC
 import pandas as pd
 from datetime import datetime
 import re
-import logging
 from datetime import date
 import slack
 import os
@@ -30,7 +29,6 @@ def waituntil(driver, class_):
 
 
 def pagina_tendencias(url_list):
-    logger.info('Inicio da Coleta de Dados dos Produtos Tendencias')
     global data
     data = pd.DataFrame()
     data['Posicao'] = 'NA'
@@ -68,17 +66,14 @@ def pagina_tendencias(url_list):
     #return data
 
     #navegador.quit()
-    logger.info('FIM')
 
 
 def pagina_produtos(data):
     for z in range(len(data)):
     #for z in range(2):
         print("{} / {}".format(z + 1, len(data)))
-        logger.info('%s de %s', z, len(data))
 
         url = data.loc[z, "Link"]
-        logger.info('Acessando %s', url)
         navegador.get(url)
 
         waituntil(navegador, 'ui-search-search-result__quantity-results')
@@ -86,11 +81,9 @@ def pagina_produtos(data):
         site = BeautifulSoup(page_content, 'html.parser')
 
         # Qntd anúncios normal
-        logger.info('Buscando quantidade de anuncios normal')
         product_normal_quantity = site.find('span', class_="ui-search-search-result__quantity-results").getText()
         product_normal_quantity = int(re.sub('[^0-9]', '', product_normal_quantity))
 
-        logger.info('Buscando quantidade de anuncios full')
         try:
             navegador.get(url + "_Frete_Full")
             page_content = navegador.page_source
@@ -117,7 +110,6 @@ def transformacao(data, name_list):
     global data_desejada
     global data_popular
 
-    logger.info('Transformando dados')
     # REORDENANDO COLUNAS
     data = data[['Posicao', 'Nome', 'Qnt_Normal', 'Qnt_FULL', 'Link', 'GoogleTrends', 'UltimaAtualizacao']]
 
@@ -126,13 +118,11 @@ def transformacao(data, name_list):
     data_desejada = data.loc[data['Posicao'].str.contains('DESEJADA')]
     data_popular = data.loc[data['Posicao'].str.contains('POPULAR')]
 
-    logger.warning('Atualizar esse trecho')
     # REMOVENDO STRING E CONVERTENDO POSICAO PARA INT
     data_crescimento['Posicao'] = data_crescimento['Posicao'].str.extract('(\d+)').astype(int)
     data_desejada['Posicao'] = data_desejada['Posicao'].str.extract('(\d+)').astype(int)
     data_popular['Posicao'] = data_popular['Posicao'].str.extract('(\d+)').astype(int)
 
-    logger.info('Salvando XLSX')
     writer = pd.ExcelWriter('XLSX/' + name_list[l], engine='xlsxwriter')
     data_crescimento.to_excel(writer, sheet_name='Crescimento', index=False)
     data_desejada.to_excel(writer, sheet_name='Desejados', index=False)
@@ -192,16 +182,9 @@ if __name__ == "__main__":
     if not os.path.exists('XLSX'):
         os.makedirs('XLSX')
 
-    # Logging
-    logging.basicConfig(filename='Logs/tendencias_ml.txt',
-                        format='%(asctime)s - %(levelname)s - %(name)s - %(message)s', datefmt='%Y-%m-%d %H:%M:%S',
-                        level=logging.INFO)
-    logger = logging.getLogger('tendencias_ml')
-
     # Call Functions
     for l in range(len(url_list)):
         pagina_tendencias(url_list)
         pagina_produtos(data)
         transformacao(data, name_list)
         bot_slack(name_list)
-        logger.info('FIM')
