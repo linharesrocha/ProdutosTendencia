@@ -30,7 +30,7 @@ def pagina_tendencias(url_list):
     data = pd.DataFrame()
     data['Posicao'] = 'NA'
     data['Nome'] = 'NA'
-    data['Link'] = 'NA'
+    data['Link_ML'] = 'NA'
 
     # Iniciando Navegador
     navegador.get(url_list[l])
@@ -52,7 +52,7 @@ def pagina_tendencias(url_list):
         for product in category_trends:
             data.loc[aux, 'Posicao'] = product.find('div', class_='ui-search-entry-description').getText()
             data.loc[aux, 'Nome'] = product.find('h3', class_='ui-search-entry-keyword').getText()
-            data.loc[aux, 'Link'] = product.find('a', href=True).get('href').replace('#trend', '')
+            data.loc[aux, 'Link_ML'] = product.find('a', href=True).get('href').replace('#trend', '')
             aux += 1
 
     data['Qnt_Normal'] = 0
@@ -69,7 +69,7 @@ def pagina_tendencias(url_list):
 def pagina_produtos(data):
     #for z in range(len(data)):
     for z in range(2):
-        url = data.loc[z, "Link"]
+        url = data.loc[z, "Link_ML"]
         navegador.get(url)
 
         waituntil(navegador, 'ui-search-search-result__quantity-results')
@@ -131,7 +131,7 @@ def transformacao(data, name_list):
     global data_popular
 
     # REORDENANDO COLUNAS
-    data = data[['Posicao', 'Nome', 'Qnt_Normal', 'Qnt_FULL', 'Qnt_Netshoes', 'Link', 'GoogleTrends', 'UltimaAtualizacao']]
+    data = data[['Posicao', 'Nome', 'Qnt_Normal', 'Qnt_FULL', 'Qnt_Netshoes', 'Link_ML', 'GoogleTrends', 'UltimaAtualizacao']]
 
     # CRIANDO 3 DATAFRAMES DIFERENTES
     data_crescimento = data.loc[data['Posicao'].str.contains('CRESCIMENTO')]
@@ -168,7 +168,7 @@ def transformacao(data, name_list):
 
 def bot_slack(name_list):
     # Settings
-    env_path = Path('.') / 'C:\workspace\ProdutosTendencia\Slack\.env'
+    env_path = Path('.') / 'C:\workspace\ProdutosTendencia\.env'
     load_dotenv(dotenv_path=env_path)
     app = slack.WebClient(token=os.environ['SLACK_TOKEN'])
 
