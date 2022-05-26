@@ -11,12 +11,11 @@ import pandas as pd
 from datetime import datetime
 import re
 import logging
+from datetime import date
+import slack
 import os
-
-
-# Functions
-from Slack.bot import bot_slack
-
+from pathlib import Path
+from dotenv import load_dotenv
 
 def waituntil(driver, class_):
     try:
@@ -30,7 +29,7 @@ def waituntil(driver, class_):
         WebDriverWait(driver, 10).until(element_present)
 
 
-def pagina_tendencias():
+def pagina_tendencias(url_list):
     logger.info('Inicio da Coleta de Dados dos Produtos Tendencias')
     global data
     data = pd.DataFrame()
@@ -38,9 +37,8 @@ def pagina_tendencias():
     data['Nome'] = 'NA'
     data['Link'] = 'NA'
 
-    url = "https://tendencias.mercadolivre.com.br/1276-esportes_e_fitness"
     # Iniciando Navegador
-    navegador.get(url)
+    navegador.get(url_list[l])
     # Descendo a pagina para carregar todos os produtos
     body = navegador.find_element(By.CSS_SELECTOR, "body")
     for i in range(1, 20):
@@ -67,16 +65,16 @@ def pagina_tendencias():
     data['GoogleTrends'] = 'NA'
     data['UltimaAtualizacao'] = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
 
-    return data
+    #return data
 
-    navegador.quit()
+    #navegador.quit()
     logger.info('FIM')
 
 
 def pagina_produtos(data):
     for z in range(len(data)):
     #for z in range(2):
-        print("{} / {}".format(z+1, len(data)))
+        print("{} / {}".format(z + 1, len(data)))
         logger.info('%s de %s', z, len(data))
 
         url = data.loc[z, "Link"]
@@ -90,7 +88,7 @@ def pagina_produtos(data):
         # Qntd anúncios normal
         logger.info('Buscando quantidade de anuncios normal')
         product_normal_quantity = site.find('span', class_="ui-search-search-result__quantity-results").getText()
-        product_normal_quantity = int(re.sub('[^0-9]','', product_normal_quantity))
+        product_normal_quantity = int(re.sub('[^0-9]', '', product_normal_quantity))
 
         logger.info('Buscando quantidade de anuncios full')
         try:
@@ -98,7 +96,7 @@ def pagina_produtos(data):
             page_content = navegador.page_source
             site = BeautifulSoup(page_content, 'html.parser')
             product_full_quantity = site.find('span', class_="ui-search-search-result__quantity-results").getText()
-            product_full_quantity = int(re.sub('[^0-9]','', product_full_quantity))
+            product_full_quantity = int(re.sub('[^0-9]', '', product_full_quantity))
         except AttributeError:
             product_full_quantity = 0
 
@@ -106,17 +104,15 @@ def pagina_produtos(data):
         data.loc[z, 'Qnt_Normal'] = product_normal_quantity
         data.loc[z, 'Qnt_FULL'] = product_full_quantity
 
-
         url_gtrends = "https://trends.google.com.br/trends/explore?geo=BR&q="
         name_product = data.loc[z, 'Nome']
         data.loc[z, 'GoogleTrends'] = url_gtrends + name_product
 
-    navegador.quit()
+    #navegador.quit()
     return data
 
 
-
-def transformacao(data):
+def transformacao(data, name_list):
     global data_crescimento
     global data_desejada
     global data_popular
@@ -137,7 +133,7 @@ def transformacao(data):
     data_popular['Posicao'] = data_popular['Posicao'].str.extract('(\d+)').astype(int)
 
     logger.info('Salvando XLSX')
-    writer = pd.ExcelWriter('XLSX/esporte_e_fitness.xlsx', engine='xlsxwriter')
+    writer = pd.ExcelWriter('XLSX/' + name_list[l], engine='xlsxwriter')
     data_crescimento.to_excel(writer, sheet_name='Crescimento', index=False)
     data_desejada.to_excel(writer, sheet_name='Desejados', index=False)
     data_popular.to_excel(writer, sheet_name='Popular', index=False)
@@ -159,8 +155,28 @@ def transformacao(data):
 
     writer.save()
 
+def bot_slack(name_list):
+    # Settings
+    env_path = Path('.') / 'C:\workspace\ProdutosTendencia\Slack\.env'
+    load_dotenv(dotenv_path=env_path)
+    app = slack.WebClient(token=os.environ['SLACK_TOKEN'])
+
+    # # Formating Date
+    # today = date.today()
+    # d1 = today.strftime("%d/%m/%Y")
+    #
+    # # Seding
+    # app.chat_postMessage(channel='produtos-tendencia-test', text="PRODUTOS TENDÊNCIAS - " + d1)
+    app.files_upload(channels='produtos-tendencia', file='XLSX/' + name_list[l])
+
 
 if __name__ == "__main__":
+    url_list = ['https://tendencias.mercadolivre.com.br/1276-esportes_e_fitness',
+                'https://tendencias.mercadolivre.com.br/1430-calcados__roupas_e_bolsas',
+                'https://tendencias.mercadolivre.com.br/264586-saude']
+
+    name_list = ['esportes_e_fitness.xlsx', 'calcados__roupas_e_bolsas.xlsx', 'saude.xlsx']
+
     # Configurações Driver
     option = Options()
     option.headless = True
@@ -176,13 +192,16 @@ if __name__ == "__main__":
     if not os.path.exists('XLSX'):
         os.makedirs('XLSX')
 
-    #Logging
-    logging.basicConfig(filename='Logs/tendencias_ml.txt', format='%(asctime)s - %(levelname)s - %(name)s - %(message)s', datefmt='%Y-%m-%d %H:%M:%S', level=logging.INFO)
+    # Logging
+    logging.basicConfig(filename='Logs/tendencias_ml.txt',
+                        format='%(asctime)s - %(levelname)s - %(name)s - %(message)s', datefmt='%Y-%m-%d %H:%M:%S',
+                        level=logging.INFO)
     logger = logging.getLogger('tendencias_ml')
 
     # Call Functions
-    #pagina_tendencias()
-    #pagina_produtos(data)
-    #transformacao(data)
-    bot_slack()
-    logger.info('FIM')
+    for l in range(len(url_list)):
+        pagina_tendencias(url_list)
+        pagina_produtos(data)
+        transformacao(data, name_list)
+        bot_slack(name_list)
+        logger.info('FIM')
