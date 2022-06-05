@@ -22,22 +22,26 @@ def waituntil(driver, class_):
         element_present = EC.presence_of_element_located((By.CLASS_NAME, class_))
         WebDriverWait(driver, 10).until(element_present)
     except TimeoutException:
-        print('Classe nao encontrada' + class_)
+        print('Classe nao encontrada ' + class_)
 
 
-def pagina_tendencias(url_list):
-    global data
-    data = pd.DataFrame()
-    data['Posicao'] = 'NA'
-    data['Nome'] = 'NA'
-    data['Link_ML'] = 'NA'
-
-    # Iniciando Navegador
-    navegador.get(url_list[l])
-    # Descendo a pagina para carregar todos os produtos
-    body = navegador.find_element(By.CSS_SELECTOR, "body")
+def down_page(body):
     for i in range(1, 20):
         body.send_keys(Keys.PAGE_DOWN)
+
+
+def posicao_nomes_links():
+    global data
+
+    url = 'https://tendencias.mercadolivre.com.br/1276-esportes_e_fitness'
+
+    # Iniciando Navegador
+    navegador.get(url)
+
+    # Descendo a pagina para carregar todos os produtos
+    body = navegador.find_element(By.CSS_SELECTOR, "body")
+
+    down_page(body)
 
     waituntil(navegador, 'ui-search-entry-keyword')
     page_content = navegador.page_source
@@ -45,68 +49,89 @@ def pagina_tendencias(url_list):
 
     page_trends = site.findAll(class_="ui-search-carousel")
 
-    aux = 0
-    for x in range(len(page_trends)):
-        # Pegando produtos
-        category_trends = page_trends[x].findAll('div', class_='entry-column')
+    # Criando lista para armazenar produtos dos 3 Carroseis
+    posicao = []
+    nome = []
+    link = []
+
+    # Todas as categorias: Cresceram/Deseajados/Populares
+    for categoria in range(len(page_trends)):
+
+        # Pegando todos os cards do carrousel de produtos
+        category_trends = page_trends[categoria].findAll('div', class_='entry-column')
+
         for product in category_trends:
-            data.loc[aux, 'Posicao'] = product.find('div', class_='ui-search-entry-description').getText()
-            data.loc[aux, 'Nome'] = product.find('h3', class_='ui-search-entry-keyword').getText()
-            data.loc[aux, 'Link_ML'] = product.find('a', href=True).get('href').replace('#trend', '')
-            aux += 1
+            posicao.append(product.find('div', class_='ui-search-entry-description').getText())
+            nome.append(product.find('h3', class_='ui-search-entry-keyword').getText())
+            link.append(product.find('a', href=True).get('href').replace('#trend', ''))
 
-    data['Qnt_ML'] = 0
-    data['Qnt_FULL'] = 0
-    data['Qnt_Netshoes'] = 0
-    data['GoogleTrends'] = 'NA'
-    data['UltimaAtualizacao'] = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+    dicionario = {'Posicao': posicao, 'Nome': nome, 'Link_ML': link}
+    data = pd.DataFrame(dicionario)
 
-    #return data
-
-    #navegador.quit()
+    return data
 
 
-def pagina_produtos(data):
-    for z in range(len(data)):
-    #for z in range(2):
-        url = data.loc[z, "Link_ML"]
-        navegador.get(url)
+def qntd_nomal_e_full(data):
+    list_links_ml = data['Link_ML'].tolist()
+
+    normal_quantity = []
+    full_quantity = []
+
+    # Acessa cada produto
+    for link in list_links_ml:
+        navegador.get(link)
 
         waituntil(navegador, 'ui-search-search-result__quantity-results')
         page_content = navegador.page_source
         site = BeautifulSoup(page_content, 'html.parser')
 
-        # Qntd anúncios normal
-        product_normal_quantity = site.find('span', class_="ui-search-search-result__quantity-results").getText()
-        product_normal_quantity = int(re.sub('[^0-9]', '', product_normal_quantity))
+        # Quantidade de anúncios na modalidade envio normal
+        normal_string_quantity = site.find('span', class_="ui-search-search-result__quantity-results").getText()
+        normal_int_quantity = int(re.sub('[^0-9]', '', normal_string_quantity))
 
+        # Quantidade de anúncios na modalidade de envio Full
         try:
-            navegador.get(url + "_Frete_Full")
+            navegador.get(link + "_Frete_Full")
             page_content = navegador.page_source
             site = BeautifulSoup(page_content, 'html.parser')
-            product_full_quantity = site.find('span', class_="ui-search-search-result__quantity-results").getText()
-            product_full_quantity = int(re.sub('[^0-9]', '', product_full_quantity))
+            full_string_quantity = site.find('span', class_="ui-search-search-result__quantity-results").getText()
+            full_int_quantity = int(re.sub('[^0-9]', '', full_string_quantity))
         except AttributeError:
-            product_full_quantity = 0
+            full_int_quantity = 0
 
-        # CRIANDO NOVAS COLUNAS
-        data.loc[z, 'Qnt_ML'] = product_normal_quantity
-        data.loc[z, 'Qnt_FULL'] = product_full_quantity
+        normal_quantity.append(normal_int_quantity)
+        full_quantity.append(full_int_quantity)
 
-        url_gtrends = "https://trends.google.com.br/trends/explore?geo=BR&q="
-        name_product = data.loc[z, 'Nome']
-        data.loc[z, 'GoogleTrends'] = url_gtrends + name_product
+    data['Qnt_ML'] = normal_quantity
+    data['Qnt_FULL'] = full_quantity
 
-    #navegador.quit()
     return data
 
 
-def netshoes():
-    for i in range(len(data)):
-    #for i in range(2):
-        name_product = data.loc[i, "Nome"]
-        url = 'https://www.netshoes.com.br/busca?nsCat=Natural&q=' + name_product
-        navegador.get(url)
+def google_trends(data):
+    # Lista dos nomes dos produtos
+    list_product_names = data['Nome'].tolist()
+
+    url_google_trends = "https://trends.google.com.br/trends/explore?geo=BR&q="
+    linkTrends = []
+
+    for name in list_product_names:
+        linkTrends.append(url_google_trends + name)
+
+    data['GoogleTrends'] = linkTrends
+
+    return data
+
+
+def qntd_netshoes(data):
+    list_qntd_netshoes = []
+
+    # Lista dos nomes dos produtos
+    list_product_names = data['Nome'].tolist()
+    url = 'https://www.netshoes.com.br/busca?nsCat=Natural&q='
+
+    for name in list_product_names:
+        navegador.get(url + name)
         waituntil(navegador, 'items-info')
         page_content = navegador.page_source
         site = BeautifulSoup(page_content, 'html.parser')
@@ -118,50 +143,35 @@ def netshoes():
             list_numbers_string = re.findall(r'\d+', product_quantity_string)
             results = list(map(int, list_numbers_string))
             product_quantity = results[-1]
-            data.loc[i, 'Qnt_Netshoes'] = product_quantity
         except AttributeError:
-            data.loc[i, 'Qnt_Netshoes'] = 0
+            product_quantity = 0
+
+        list_qntd_netshoes.append(product_quantity)
+
+    data['Qnt_Netshoes'] = list_qntd_netshoes
+
+    return data
 
 
+def ultima_atualizacao(data):
+    data['UltimaAtualizacao'] = datetime.now().strftime('%d-%m-%Y %H:%M:%S')
+
+    return data
 
 
-def transformacao(data, name_list):
-    global data_crescimento
-    global data_desejada
-    global data_popular
+def salvando_excel(data):
 
     # REORDENANDO COLUNAS
-    data = data[['Posicao', 'Nome', 'Qnt_ML', 'Qnt_FULL', 'Qnt_Netshoes', 'Link_ML', 'GoogleTrends', 'UltimaAtualizacao']]
+    data = data[['Posicao', 'Nome', 'Qnt_ML', 'Qnt_FULL', 'Qnt_Netshoes',
+                 'Link_ML', 'GoogleTrends', 'UltimaAtualizacao']]
 
-    # CRIANDO 3 DATAFRAMES DIFERENTES
-    data_crescimento = data.loc[data['Posicao'].str.contains('CRESCIMENTO')]
-    data_desejada = data.loc[data['Posicao'].str.contains('DESEJADA')]
-    data_popular = data.loc[data['Posicao'].str.contains('POPULAR')]
+    writer = pd.ExcelWriter('XLSX/' + 'Tendencias' + '-' + d1 + '.xlsx', engine='xlsxwriter')
+    data.to_excel(writer, sheet_name='Tendencias', index=False)
 
-    # REMOVENDO STRING E CONVERTENDO POSICAO PARA INT
-    data_crescimento['Posicao'] = data_crescimento['Posicao'].str.extract('(\d+)').astype(int)
-    data_desejada['Posicao'] = data_desejada['Posicao'].str.extract('(\d+)').astype(int)
-    data_popular['Posicao'] = data_popular['Posicao'].str.extract('(\d+)').astype(int)
-
-    writer = pd.ExcelWriter('XLSX/' + name_list[l] + '-' + d1 + '.xlsx', engine='xlsxwriter')
-    data_crescimento.to_excel(writer, sheet_name='Crescimento', index=False)
-    data_desejada.to_excel(writer, sheet_name='Desejados', index=False)
-    data_popular.to_excel(writer, sheet_name='Popular', index=False)
-
-    for column in data_crescimento:
-        column_length = max(data_crescimento[column].astype(str).map(len).max(), len(column))
-        col_idx = data_crescimento.columns.get_loc(column)
-        writer.sheets['Crescimento'].set_column(col_idx, col_idx, column_length)
-
-    for column in data_desejada:
-        column_length = max(data_desejada[column].astype(str).map(len).max(), len(column))
-        col_idx = data_desejada.columns.get_loc(column)
-        writer.sheets['Desejados'].set_column(col_idx, col_idx, column_length)
-
-    for column in data_popular:
-        column_length = max(data_popular[column].astype(str).map(len).max(), len(column))
-        col_idx = data_popular.columns.get_loc(column)
-        writer.sheets['Popular'].set_column(col_idx, col_idx, column_length)
+    for column in data:
+        column_length = max(data[column].astype(str).map(len).max(), len(column))
+        col_idx = data.columns.get_loc(column)
+        writer.sheets['Tendencias'].set_column(col_idx, col_idx, column_length)
 
     writer.save()
 
@@ -178,6 +188,7 @@ def bot_slack(name_list):
 
 
 if __name__ == "__main__":
+
     url_list = ['https://tendencias.mercadolivre.com.br/1276-esportes_e_fitness',
                 'https://tendencias.mercadolivre.com.br/1430-calcados__roupas_e_bolsas',
                 'https://tendencias.mercadolivre.com.br/264586-saude']
@@ -195,7 +206,7 @@ if __name__ == "__main__":
     navegador.maximize_window()
 
     # Disable Logs Pandas
-    pd.set_option('mode.chained_assignment', None)
+    # pd.set_option('mode.chained_assignment', None)
 
     # Mkdir
     if not os.path.exists('Logs'):
@@ -204,9 +215,10 @@ if __name__ == "__main__":
         os.makedirs('XLSX')
 
     # Call Functions
-    for l in range(len(url_list)):
-        pagina_tendencias(url_list)
-        pagina_produtos(data)
-        netshoes()
-        transformacao(data, name_list)
-        bot_slack(name_list)
+    posicao_nomes_links()
+    qntd_nomal_e_full(data)
+    google_trends(data)
+    qntd_netshoes(data)
+    ultima_atualizacao(data)
+    salvando_excel(data)
+    # bot_slack(name_list)
