@@ -15,8 +15,10 @@ import slack
 import os
 from pathlib import Path
 from dotenv import load_dotenv
+import time
 
 
+# Help Functions
 def waituntil(driver, class_):
     try:
         element_present = EC.presence_of_element_located((By.CLASS_NAME, class_))
@@ -30,6 +32,7 @@ def down_page(body):
         body.send_keys(Keys.PAGE_DOWN)
 
 
+# Main Functions
 def posicao_nomes_links():
     global data
 
@@ -65,14 +68,14 @@ def posicao_nomes_links():
             nome.append(product.find('h3', class_='ui-search-entry-keyword').getText())
             link.append(product.find('a', href=True).get('href').replace('#trend', ''))
 
-    dicionario = {'Posicao': posicao, 'Nome': nome, 'Link_ML': link}
+    dicionario = {'posicao': posicao, 'nome': nome, 'link_mL': link}
     data = pd.DataFrame(dicionario)
 
     return data
 
 
 def qntd_nomal_e_full(data):
-    list_links_ml = data['Link_ML'].tolist()
+    list_links_ml = data['link_mL'].tolist()
 
     normal_quantity = []
     full_quantity = []
@@ -102,15 +105,15 @@ def qntd_nomal_e_full(data):
         normal_quantity.append(normal_int_quantity)
         full_quantity.append(full_int_quantity)
 
-    data['Qnt_ML'] = normal_quantity
-    data['Qnt_FULL'] = full_quantity
+    data['qnt_mL'] = normal_quantity
+    data['qnt_full'] = full_quantity
 
     return data
 
 
 def google_trends(data):
     # Lista dos nomes dos produtos
-    list_product_names = data['Nome'].tolist()
+    list_product_names = data['nome'].tolist()
 
     url_google_trends = "https://trends.google.com.br/trends/explore?geo=BR&q="
     linkTrends = []
@@ -118,7 +121,7 @@ def google_trends(data):
     for name in list_product_names:
         linkTrends.append(url_google_trends + name)
 
-    data['GoogleTrends'] = linkTrends
+    data['googletrends'] = linkTrends
 
     return data
 
@@ -127,7 +130,7 @@ def qntd_netshoes(data):
     list_qntd_netshoes = []
 
     # Lista dos nomes dos produtos
-    list_product_names = data['Nome'].tolist()
+    list_product_names = data['nome'].tolist()
     url = 'https://www.netshoes.com.br/busca?nsCat=Natural&q='
 
     for name in list_product_names:
@@ -148,22 +151,21 @@ def qntd_netshoes(data):
 
         list_qntd_netshoes.append(product_quantity)
 
-    data['Qnt_Netshoes'] = list_qntd_netshoes
+    data['qnt_netshoes'] = list_qntd_netshoes
 
     return data
 
 
 def ultima_atualizacao(data):
-    data['UltimaAtualizacao'] = datetime.now().strftime('%d-%m-%Y %H:%M:%S')
+    data['ultima_atualizacao'] = datetime.now().strftime('%d-%m-%Y %H:%M:%S')
 
     return data
 
 
 def salvando_excel(data):
-
     # REORDENANDO COLUNAS
-    data = data[['Posicao', 'Nome', 'Qnt_ML', 'Qnt_FULL', 'Qnt_Netshoes',
-                 'Link_ML', 'GoogleTrends', 'UltimaAtualizacao']]
+    data = data[['posicao', 'nome', 'qnt_mL', 'qnt_full', 'qnt_netshoes',
+                 'link_ml', 'googletrends', 'ultima_atualizacao']]
 
     writer = pd.ExcelWriter('XLSX/' + 'Tendencias' + '-' + d1 + '.xlsx', engine='xlsxwriter')
     data.to_excel(writer, sheet_name='Tendencias', index=False)
@@ -188,37 +190,33 @@ def bot_slack(name_list):
 
 
 if __name__ == "__main__":
-
-    url_list = ['https://tendencias.mercadolivre.com.br/1276-esportes_e_fitness',
-                'https://tendencias.mercadolivre.com.br/1430-calcados__roupas_e_bolsas',
-                'https://tendencias.mercadolivre.com.br/264586-saude']
-
-    name_list = ['esportes_e_fitness', 'calcados__roupas_e_bolsas', 'saude']
-
     # Formating Date
     today = date.today()
     d1 = today.strftime("%d-%m-%Y")
 
     # Configurações Driver
     option = Options()
-    option.headless = True
+    option.headless = False
     navegador = webdriver.Firefox(options=option)
     navegador.maximize_window()
 
-    # Disable Logs Pandas
-    # pd.set_option('mode.chained_assignment', None)
-
-    # Mkdir
+    # Folders
     if not os.path.exists('Logs'):
         os.makedirs('Logs')
     if not os.path.exists('XLSX'):
         os.makedirs('XLSX')
 
     # Call Functions
+    st = time.time()
+
     posicao_nomes_links()
     qntd_nomal_e_full(data)
     google_trends(data)
     qntd_netshoes(data)
     ultima_atualizacao(data)
     salvando_excel(data)
+
+    elapsed_time = time.time() - st
+    print('Execution time:', time.strftime("%H:%M:%S", time.gmtime(elapsed_time)))
+
     # bot_slack(name_list)
